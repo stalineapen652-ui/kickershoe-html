@@ -1,0 +1,7 @@
+# Local / OS junk
+.DS_Store
+Thumbs.db
+
+# Source archives & docs that shouldn't ship to the CDN
+*.zip
+*.pdf

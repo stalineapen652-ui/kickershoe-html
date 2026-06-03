@@ -1,0 +1,13 @@
+# Vercel
+.vercel
+
+# Dependencies (none currently, but just in case)
+node_modules
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Source archives & docs (not part of the deployed site)
+*.zip
+*.pdf
