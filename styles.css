@@ -841,6 +841,53 @@ details > p {
   backdrop-filter: blur(4px);
   z-index: 2;
 }
+
+/* Diagonal panel cuts — each frame in a 5-panel module (2-up / wide / 2-up)
+   gets one corner sheared off for a hand-cut comic-page feel. */
+.comic-frame--wide { grid-column: 1 / -1; }
+.comic-frame--cut-br { clip-path: polygon(0 0, 100% 0, 100% 80%, 85% 100%, 0 100%); }
+.comic-frame--cut-bl { clip-path: polygon(0 0, 100% 0, 100% 100%, 15% 100%, 0 80%); }
+.comic-frame--cut-tr { clip-path: polygon(0 0, 85% 0, 100% 20%, 100% 100%, 0 100%); }
+.comic-frame--cut-tl {
+  clip-path: polygon(15% 0, 100% 0, 100% 100%, 0 100%, 0 20%);
+}
+.comic-frame--cut-tl .comic-tag { left: auto; right: 12px; }
+.comic-frame--wide {
+  clip-path: polygon(2% 0, 100% 0, 100% 96%, 98% 100%, 0 100%, 0 4%);
+}
+
+.comic-caption {
+  position: absolute;
+  bottom: 12px; left: 12px; right: 12px;
+  background: var(--bone);
+  color: var(--ink);
+  border: 2px solid var(--bone);
+  padding: 10px 14px;
+  z-index: 3;
+}
+.comic-caption-label {
+  display: block;
+  font-size: 9px; text-transform: uppercase; letter-spacing: 0.2em;
+  color: rgba(5, 5, 5, 0.7);
+  margin-bottom: 4px;
+}
+.comic-caption p { font-size: 12px; line-height: 1.35; }
+.comic-frame--cut-br .comic-caption { right: auto; width: 62%; }
+.comic-frame--cut-bl .comic-caption { left: auto; width: 62%; }
+
 @media (max-width: 720px) {
   .comic-grid { grid-template-columns: 1fr; }
+  .comic-frame--wide,
+  .comic-frame--cut-br,
+  .comic-frame--cut-bl,
+  .comic-frame--cut-tr,
+  .comic-frame--cut-tl {
+    grid-column: auto;
+    clip-path: none;
+  }
+  .comic-frame--cut-tl .comic-tag { left: 12px; right: auto; }
+  .comic-frame--cut-br .comic-caption,
+  .comic-frame--cut-bl .comic-caption {
+    left: 12px; right: 12px; width: auto;
+  }
 }
