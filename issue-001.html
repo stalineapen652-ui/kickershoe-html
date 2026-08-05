@@ -49,11 +49,11 @@
       </header>
       <ul class="comic-grid">
         <li class="comic-frame comic-frame--cut-br">
-          <span class="comic-tag">01 // FRIENDS</span>
+          <span class="comic-tag">01 // Long Ago</span>
           <img src="assets/issues/mantis/1friends.jpeg" alt="The mantis and his frog friend hidden in the tall grass at night" />
           <span class="comic-caption">
             <span class="comic-caption-label">CAPTION — 01</span>
-            <p>Two outcasts in the tall grass. He wasn't the only one who didn't fit.</p>
+            <p>Once, there was a MANTIS named alberto that lived in the grass with his best friend, a bill.</p>
           </span>
         </li>
         <li class="comic-frame comic-frame--cut-bl">
@@ -61,7 +61,7 @@
           <img src="assets/issues/mantis/2drill.jpeg" alt="The mantis mid-kick in an explosive training drill" />
           <span class="comic-caption">
             <span class="comic-caption-label">CAPTION — 02</span>
-            <p>Every night, alone, he drilled the move no one taught him.</p>
+            <p>As a young mantis, he was UNDESTRUCTABLE. No one could stop him. His body was fast, strong and protected by thick skin.</p>
           </span>
         </li>
         <li class="comic-frame comic-frame--wide">
@@ -69,7 +69,7 @@
           <img src="assets/issues/mantis/3rd-drill.jpeg" alt="The mantis leaping through debris in a violent burst of motion" />
           <span class="comic-caption">
             <span class="comic-caption-label">CAPTION — 03</span>
-            <p>Faster. Harder. Something in him started to break loose.</p>
+            <p>With his agility, he could pierce through a rock like it was nothing. Nothing stood in his way. He was a legend in that city and his friend was proud.</p>
           </span>
         </li>
         <li class="comic-frame comic-frame--cut-tr">
@@ -77,7 +77,7 @@
           <img src="assets/issues/mantis/4scientist.jpeg" alt="Masked figures examining the captured mantis on a table of cages" />
           <span class="comic-caption">
             <span class="comic-caption-label">CAPTION — 04</span>
-            <p>Then the men came with cages and masks, calling it science.</p>
+            <p>Inspired by the mantis, many designers went deep into the wild to study his body...</p>
           </span>
         </li>
         <li class="comic-frame comic-frame--cut-tl">
@@ -85,7 +85,7 @@
           <img src="assets/issues/mantis/5map.jpeg" alt="A sketchbook study of the mantis with a magnifying glass over shell texture" />
           <span class="comic-caption">
             <span class="comic-caption-label">CAPTION — 05</span>
-            <p>In captivity, they measured him. Sketched him. Wondered what his shell could become.</p>
+            <p>...his shape. his armor, his agility. They studied every detail. Every joint. Every layer</p>
           </span>
         </li>
         <li class="comic-frame comic-frame--cut-br">
@@ -93,7 +93,7 @@
           <img src="assets/issues/mantis/6shoe.jpeg" alt="The finished mantis football boot, glowing green" />
           <span class="comic-caption">
             <span class="comic-caption-label">CAPTION — 06</span>
-            <p>What they built from him would outlive the both of them.</p>
+            <p>From his design, they created something never seen before. A football boot inspired by the MANTIS.</p>
           </span>
         </li>
         <li class="comic-frame comic-frame--cut-bl">
@@ -101,7 +101,7 @@
           <img src="assets/issues/mantis/7ground.jpeg" alt="A footballer sprinting toward the ball wearing the mantis boots" />
           <span class="comic-caption">
             <span class="comic-caption-label">CAPTION — 07</span>
-            <p>Laced up, a stranger ran faster than his own shadow.</p>
+            <p>A boot that PIERCES anything in its path... and gives COMPLETE AGILITY to the one who wears it.</p>
           </span>
         </li>
         <li class="comic-frame comic-frame--wide">
@@ -109,7 +109,7 @@
           <img src="assets/issues/mantis/8reference.jpeg" alt="A close anatomical reference study of the mantis's leg and texture" />
           <span class="comic-caption">
             <span class="comic-caption-label">CAPTION — 08</span>
-            <p>The world studied every ridge and vein, trying to copy what couldn't be copied.</p>
+            <p>Sharp like a mantis. Tough like a shield. Fast like the wind. This is not just a boot. This is the MANTIS WEAVE.</p>
           </span>
         </li>
         <li class="comic-frame comic-frame--cut-tr">
@@ -117,7 +117,7 @@
           <img src="assets/issues/mantis/9backside.jpeg" alt="A footballer's back, number 7, silhouetted against the city skyline" />
           <span class="comic-caption">
             <span class="comic-caption-label">CAPTION — 09</span>
-            <p>Number 7. A name the crowd would learn to chant.</p>
+            <p>Worn by those who dare to be different. Made for those who are unstoppable</p>
           </span>
         </li>
         <li class="comic-frame comic-frame--cut-tl">
@@ -125,7 +125,7 @@
           <img src="assets/issues/mantis/10climax.jpeg" alt="The mantis and his frog friend looking out over the city together" />
           <span class="comic-caption">
             <span class="comic-caption-label">CAPTION — 10</span>
-            <p>And somewhere past the floodlights, two old friends watched the city they changed.</p>
+            <p>From a mantis in the grass... to a legacy on the field. That's how legends are made. And this is just the BEGINNING</p>
           </span>
         </li>
       </ul>
@@ -197,6 +197,28 @@
     <span class="dot"></span>
     <span class="sfx-label">SFX OFF</span>
   </button>
+
+  <!-- Comic panel scroll reveal: image in, then caption, then caption words one by one -->
+  <script>
+    document.querySelectorAll('.comic-caption p').forEach(function (p) {
+      var words = p.textContent.trim().split(/\s+/);
+      p.innerHTML = words.map(function (word, i) {
+        return '<span class="word" style="--i:' + i + '">' + word + '</span>';
+      }).join(' ');
+    });
+
+    var comicFrames = document.querySelectorAll('.comic-frame');
+    if ('IntersectionObserver' in window) {
+      var comicObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          entry.target.classList.toggle('in-view', entry.isIntersecting);
+        });
+      }, { threshold: 0.35 });
+      comicFrames.forEach(function (frame) { comicObserver.observe(frame); });
+    } else {
+      comicFrames.forEach(function (frame) { frame.classList.add('in-view'); });
+    }
+  </script>
 
   <!-- Vercel Speed Insights (static-site snippet) -->
   <script>

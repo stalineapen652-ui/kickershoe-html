@@ -826,11 +826,18 @@ details > p {
   position: relative;
   aspect-ratio: 1280 / 890;
   overflow: hidden;
-  border: 4px solid var(--bone);
+  /* border: 4px solid var(--bone); */
   box-shadow: 8px 8px 0 0 var(--ink), 8px 8px 0 4px var(--bone);
   background: var(--ink);
 }
-.comic-frame img { width: 100%; height: 100%; object-fit: cover; }
+.comic-frame img {
+  width: 100%; height: 100%; object-fit: cover;
+  opacity: 0;
+  transform: scale(1.08);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.comic-frame.in-view img { opacity: 1; transform: scale(1); }
+
 .comic-frame .comic-tag {
   position: absolute; top: 12px; left: 12px;
   background: rgba(5,5,5,0.75);
@@ -840,16 +847,20 @@ details > p {
   font-size: 10px; text-transform: uppercase; letter-spacing: 0.25em;
   backdrop-filter: blur(4px);
   z-index: 2;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  transition-delay: 0.15s;
 }
+.comic-frame.in-view .comic-tag { opacity: 1; }
 
 /* Diagonal panel cuts — each frame in a 5-panel module (2-up / wide / 2-up)
    gets one corner sheared off for a hand-cut comic-page feel. */
 .comic-frame--wide { grid-column: 1 / -1; }
-.comic-frame--cut-br { clip-path: polygon(0 0, 100% 0, 100% 80%, 85% 100%, 0 100%); }
-.comic-frame--cut-bl { clip-path: polygon(0 0, 100% 0, 100% 100%, 15% 100%, 0 80%); }
-.comic-frame--cut-tr { clip-path: polygon(0 0, 85% 0, 100% 20%, 100% 100%, 0 100%); }
+.comic-frame--cut-br { clip-path: polygon(0 0, 100% 0, 100% 0%, 75% 100%, 0 100%); }
+.comic-frame--cut-bl { clip-path: polygon(20% 0, 100% 0, 100% 100%, 20% 100%, 0 80%); }
+.comic-frame--cut-tr { clip-path: polygon(0 0, 55% 0, 100% 20%, 100% 100%, 0 100%); }
 .comic-frame--cut-tl {
-  clip-path: polygon(15% 0, 100% 0, 100% 100%, 0 100%, 0 20%);
+  clip-path: polygon(50% 0, 100% 0, 100% 100%, 0 100%, 0 20%);
 }
 .comic-frame--cut-tl .comic-tag { left: auto; right: 12px; }
 .comic-frame--wide {
@@ -864,7 +875,12 @@ details > p {
   border: 2px solid var(--bone);
   padding: 10px 14px;
   z-index: 3;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  transition-delay: 0.5s;
 }
+.comic-frame.in-view .comic-caption { opacity: 1; transform: translateY(0); }
 .comic-caption-label {
   display: block;
   font-size: 9px; text-transform: uppercase; letter-spacing: 0.2em;
@@ -872,8 +888,28 @@ details > p {
   margin-bottom: 4px;
 }
 .comic-caption p { font-size: 12px; line-height: 1.35; }
+.comic-caption .word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(8px);
+}
+.comic-frame.in-view .comic-caption .word {
+  animation: word-fade-up 0.4s ease forwards;
+  animation-delay: calc(0.75s + var(--i, 0) * 0.06s);
+}
+@keyframes word-fade-up {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 .comic-frame--cut-br .comic-caption { right: auto; width: 62%; }
 .comic-frame--cut-bl .comic-caption { left: auto; width: 62%; }
+
+@media (prefers-reduced-motion: reduce) {
+  .comic-frame img,
+  .comic-frame .comic-tag,
+  .comic-caption { transition: none; opacity: 1; transform: none; }
+  .comic-caption .word { animation: none; opacity: 1; transform: none; }
+}
 
 @media (max-width: 720px) {
   .comic-grid { grid-template-columns: 1fr; }
