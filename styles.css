@@ -7,6 +7,7 @@
   --primary: #39ff14;
   --secondary: #ff8a14;
   --gold: #d4a23a;
+  --purple: #800080;
   --font-display: 'Anton', 'Impact', sans-serif;
   --font-mono: 'JetBrains Mono', 'Courier New', monospace;
 }
@@ -25,7 +26,7 @@ body {
 
 ::selection { background: var(--primary); color: var(--ink); }
 
-.accent { color: var(--primary); }
+.accent { color: var(--purple); }
 
 img { display: block; max-width: 100%; height: auto; }
 
