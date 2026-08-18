@@ -10,118 +10,100 @@
 <body>
 
   <!-- ============ HEADER ============ -->
-  <header class="site-header">
-    <a class="brand" href="#origin">
-      <img class="brand-mark" src="assets/logo/kickershoe-logo.png" alt="Kickershoe logo" />
-      <span class="brand-name">KICKER<span class="accent">SHOE</span></span>
+  <header>
+    <a href="#origin">
+      <img src="assets/logo/kickershoe-logo.png" alt="Kickershoe logo" />
+      <span>KICKER<mark>SHOE</mark></span>
     </a>
-    <nav class="primary-nav" aria-label="Primary">
+    <nav aria-label="Primary">
       <a href="#origin">Origin</a>
       <a href="#issues">Issues</a>
       <a href="#shoe">The Shoe</a>
       <a href="#lore">Lore</a>
-      <a class="nav-cta" href="#join">Get Issue 002</a>
+      <a href="#join">Get Issue 002</a>
     </nav>
   </header>
 
   <main>
 
     <!-- ============ HERO ============ -->
-    <section id="origin" class="hero">
-      <div class="halftone" aria-hidden="true"></div>
-      <div class="spores" aria-hidden="true">
-        <span></span><span></span><span></span><span></span><span></span>
-        <span></span><span></span><span></span><span></span><span></span>
-        <span></span><span></span><span></span><span></span><span></span>
-        <span></span><span></span><span></span><span></span><span></span>
-      </div>
-
-      <div class="hero-inner">
-        <p class="eyebrow">
-          <span class="rule"></span>
+    <section id="origin">
+      <header>
+        <p>
           ISSUE 001 — A KICKERSHOE COMIC
-          <span class="rule"></span>
         </p>
 
-        <h1 class="hero-title">
-          <span class="line line-the">THE</span>
-          <span class="line line-mantis glitch" data-text="MANTIS">MANTIS</span>
-          <span class="line line-origin">ORIGIN</span>
+        <h1>
+          <span>THE</span>
+          <mark data-text="MANTIS">MANTIS</mark>
+          <span>ORIGIN</span>
         </h1>
 
-        <p class="hero-lede">
+        <p>
           A motion comic. A footnote in folklore. A shoe born from a broken leg
-          and a quiet vow. <span class="accent">The full story is one click away.</span>
+          and a quiet vow. <mark>The full story is one click away.</mark>
         </p>
 
-        <a class="hero-teaser" href="issue-001.html">
-          <span class="hero-teaser-frame">
-            <img src="assets/images/issue-001/1friends.webp" alt="Preview panel from Issue 001 — The Mantis Origin" />
-          </span>
-          <span class="hero-teaser-cta">READ ISSUE 001 <span>→</span></span>
+        <a href="issue-001.html">
+          <img src="assets/images/issue-001/1friends.webp" alt="Preview panel from Issue 001 — The Mantis Origin" />
+          <span>READ ISSUE 001 <span>→</span></span>
         </a>
 
-        <p class="scroll-hint">
+        <p>
           <span>SCROLL</span>
-          <span class="scroll-line"></span>
         </p>
-      </div>
-
-      <span class="reg-mark tl"></span>
-      <span class="reg-mark tr"></span>
-      <span class="reg-mark bl"></span>
-      <span class="reg-mark br"></span>
+      </header>
     </section>
 
     <!-- ============ ISSUES ============ -->
-    <section id="issues" class="issues">
-      <header class="section-head">
-        <p class="eyebrow-sm">// THE LIBRARY</p>
+    <section id="issues">
+      <header>
+        <p>// THE LIBRARY</p>
         <h2>ISSUES</h2>
       </header>
-      <ul class="issue-grid">
+      <ul>
         <li>
-          <a class="issue-link" href="issue-001.html">
-            <article class="issue-card">
+          <a href="issue-001.html">
+            <article>
               <img src="assets/images/issue-001/1friends.webp" alt="Issue 001 cover" />
-              <span class="issue-no">#001</span>
-              <span class="issue-status out">OUT NOW</span>
+              <data value="001">#001</data>
+              <mark>OUT NOW</mark>
               <footer>
-                <p class="issue-date">APR 2026</p>
+                <p><time datetime="2026-04">APR 2026</time></p>
                 <h3>THE MANTIS ORIGIN</h3>
               </footer>
             </article>
           </a>
         </li>
         <li>
-          <article class="issue-card">
+          <article>
             <img src="assets/images/covers/cover-002.webp" alt="Issue 002 cover" />
-            <span class="issue-no">#002</span>
-            <span class="issue-status">PRE-ORDER</span>
+            <data value="002">#002</data>
+            <span>PRE-ORDER</span>
             <footer>
-              <p class="issue-date">AUGUST 2026</p>
+              <p><time datetime="2026-08">AUGUST 2026</time></p>
               <h3>Converse</h3>
             </footer>
           </article>
         </li>
         <li>
-          <article class="issue-card">
+          <article>
             <img src="assets/images/covers/cover-003.webp" alt="Issue 003 cover" />
-            <span class="issue-no">#003</span>
-            <span class="issue-status">TEASER</span>
+            <data value="003">#003</data>
+            <span>TEASER</span>
             <footer>
-              <p class="issue-date">JUN 2026</p>
+              <p><time datetime="2026-06">JUN 2026</time></p>
               <h3>THE GOAT OG</h3>
             </footer>
           </article>
         </li>
         <li>
-          <article class="issue-card">
+          <article>
             <img src="assets/images/covers/cover-004.webp" alt="Issue 004 cover" />
-            <span class="issue-no">#004</span>
-            <span class="issue-status">SOON</span>
+            <data value="004">#004</data>
+            <span>SOON</span>
             <footer>
-              <p class="issue-date">JUL 2026</p>
+              <p><time datetime="2026-07">JUL 2026</time></p>
               <h3>TUNNEL OF GHOSTS</h3>
             </footer>
           </article>
@@ -130,131 +112,138 @@
     </section>
 
     <!-- ============ THE SHOE ============ -->
-    <section id="shoe" class="the-shoe">
-      <div class="halftone" aria-hidden="true"></div>
-      <header class="section-head">
-        <p class="eyebrow-sm">// CASE FILE — OBJECT 001</p>
-        <h2>THE <span class="accent">SHOE</span></h2>
-        <p class="section-lede">
+    <section id="shoe">
+      <header>
+        <p>// CASE FILE — OBJECT 001</p>
+        <h2>THE <mark>SHOE</mark></h2>
+        <p>
           Photographed under low light. Recovered from the long grass after the
-          third match. Material analysis pending. <span class="accent">Do not touch the sole.</span>
+          third match. Material analysis pending. <mark>Do not touch the sole.</mark>
         </p>
       </header>
 
-      <figure class="shoe-stage panel-frame">
-        <span class="shoe-glow" aria-hidden="true"></span>
-        <span class="shoe-ring outer" aria-hidden="true"></span>
-        <span class="shoe-ring inner" aria-hidden="true"></span>
-        <img class="shoe-img" src="assets/images/shoe/mantis-shoe.webp" alt="The Mantis boot floating in green light" />
+      <figure>
+        <img src="assets/images/shoe/mantis-shoe.webp" alt="The Mantis boot floating in green light" />
 
-        <aside class="callout pos-tl">
-          <p class="callout-label">[01] EXOSKELETON GRIP</p>
-          <p class="callout-desc">Woven exo-mesh upper. Bites turf like mandibles.</p>
+        <aside>
+          <p>[01] EXOSKELETON GRIP</p>
+          <p>Woven exo-mesh upper. Bites turf like mandibles.</p>
         </aside>
-        <aside class="callout pos-tr">
-          <p class="callout-label">[02] AGILITY WEAVE</p>
-          <p class="callout-desc">Lateral flex panels. Twist, pivot, vanish.</p>
+        <aside>
+          <p>[02] AGILITY WEAVE</p>
+          <p>Lateral flex panels. Twist, pivot, vanish.</p>
         </aside>
-        <aside class="callout pos-bl">
-          <p class="callout-label">[03] THE MANTIS SOLE</p>
-          <p class="callout-desc">Eight-stud chitin plate. Forged from molt.</p>
+        <aside>
+          <p>[03] THE MANTIS SOLE</p>
+          <p>Eight-stud chitin plate. Forged from molt.</p>
         </aside>
-        <aside class="callout pos-br">
-          <p class="callout-label">[04] GOLD SUTURE</p>
-          <p class="callout-desc">Hand-stitched 24k filament. A scar that shines.</p>
+        <aside>
+          <p>[04] GOLD SUTURE</p>
+          <p>Hand-stitched 24k filament. A scar that shines.</p>
         </aside>
       </figure>
     </section>
 
     <!-- ============ LORE ============ -->
-    <section id="lore" class="lore">
-      <div class="ticker" aria-hidden="true">
-        <p>
-          CLASSIFIED // MANTIS FILE 0x14 ◆
-          FIRST SIGHTING — JUNGLE PITCH 7 ◆
-          SUBJECT: GREEN, QUIET, LIMPING ◆
-          RUMOURED COLLAB — LEGENDS UNNAMED ◆
-          DO NOT REPRODUCE WITHOUT PERMISSION ◆
-          STITCHING DETECTED IN MOLTED HUSK ◆
-          CLASSIFIED // MANTIS FILE 0x14 ◆
-          FIRST SIGHTING — JUNGLE PITCH 7 ◆
-          SUBJECT: GREEN, QUIET, LIMPING ◆
-          RUMOURED COLLAB — LEGENDS UNNAMED ◆
-        </p>
-      </div>
+    <section id="lore">
+      <p aria-hidden="true">
+        CLASSIFIED // MANTIS FILE 0x14 ◆
+        FIRST SIGHTING — JUNGLE PITCH 7 ◆
+        SUBJECT: GREEN, QUIET, LIMPING ◆
+        RUMOURED COLLAB — LEGENDS UNNAMED ◆
+        DO NOT REPRODUCE WITHOUT PERMISSION ◆
+        STITCHING DETECTED IN MOLTED HUSK ◆
+        CLASSIFIED // MANTIS FILE 0x14 ◆
+        FIRST SIGHTING — JUNGLE PITCH 7 ◆
+        SUBJECT: GREEN, QUIET, LIMPING ◆
+        RUMOURED COLLAB — LEGENDS UNNAMED ◆
+      </p>
 
-      <div class="lore-body">
-        <header class="section-head">
-          <p class="eyebrow-sm">// FIELD NOTES — RESTRICTED</p>
-          <h2>LORE</h2>
+      <header>
+        <p>// FIELD NOTES — RESTRICTED</p>
+        <h2>LORE</h2>
+      </header>
+
+      <aside>
+        <header>
+          <span>FILE</span>
+          <span>0x14-MNTS</span>
         </header>
+        <p>The following entries were recovered from a notebook left in section G of the locker room. Pages stained green. Handwriting unidentified. Reproduced without correction.</p>
+        <p>— EDITOR, KICKERSHOE</p>
+      </aside>
 
-        <div class="lore-grid">
-          <aside class="file-card">
-            <header>
-              <span>FILE</span>
-              <span>0x14-MNTS</span>
-            </header>
-            <p>The following entries were recovered from a notebook left in section G of the locker room. Pages stained green. Handwriting unidentified. Reproduced without correction.</p>
-            <p class="signoff">— EDITOR, KICKERSHOE</p>
-          </aside>
-
-          <dl class="lore-entries">
-            <details open>
-              <summary><span class="entry-no">ENTRY 01</span><span class="entry-q">WHO IS THE MANTIS?</span><span class="entry-plus">+</span></summary>
-              <p>Born in the wet grass east of the river. Smaller than his peers. Quieter. He watched football from behind a leaf for nine seasons before he ever touched a ball. He is, by all accounts, still alive.</p>
-            </details>
-            <details>
-              <summary><span class="entry-no">ENTRY 02</span><span class="entry-q">THE BOOT'S FIRST MATCH</span><span class="entry-plus">+</span></summary>
-              <p>A back-alley five-a-side, no name on the sheet. Player wore them straight from a paper bag. Scored four. Vanished at half-time. The bag was never returned.</p>
-            </details>
-            <details>
-              <summary><span class="entry-no">ENTRY 03</span><span class="entry-q">WHY GREEN?</span><span class="entry-plus">+</span></summary>
-              <p>Because invisibility is a kind of armour. Because the grass owes him nothing and everything. Because gold without green is just a bruise.</p>
-            </details>
-            <details>
-              <summary><span class="entry-no">ENTRY 04</span><span class="entry-q">THE GOLD STITCHING</span><span class="entry-plus">+</span></summary>
-              <p>Filament is real. We tested it. We don't know where he gets it. He won't say.</p>
-            </details>
-          </dl>
-        </div>
-      </div>
+      <dl>
+        <details open>
+          <summary><span>ENTRY 01</span><span>WHO IS THE MANTIS?</span><span>+</span></summary>
+          <p>Born in the wet grass east of the river. Smaller than his peers. Quieter. He watched football from behind a leaf for nine seasons before he ever touched a ball. He is, by all accounts, still alive.</p>
+        </details>
+        <details>
+          <summary><span>ENTRY 02</span><span>THE BOOT'S FIRST MATCH</span><span>+</span></summary>
+          <p>A back-alley five-a-side, no name on the sheet. Player wore them straight from a paper bag. Scored four. Vanished at half-time. The bag was never returned.</p>
+        </details>
+        <details>
+          <summary><span>ENTRY 03</span><span>WHY GREEN?</span><span>+</span></summary>
+          <p>Because invisibility is a kind of armour. Because the grass owes him nothing and everything. Because gold without green is just a bruise.</p>
+        </details>
+        <details>
+          <summary><span>ENTRY 04</span><span>THE GOLD STITCHING</span><span>+</span></summary>
+          <p>Filament is real. We tested it. We don't know where he gets it. He won't say.</p>
+        </details>
+      </dl>
     </section>
 
     <!-- ============ JOIN ============ -->
-    <section id="join" class="join">
-      <div class="halftone" aria-hidden="true"></div>
-      <article class="join-panel panel-frame">
-        <div class="join-grid">
-          <header>
-            <p class="eyebrow-sm">// TRANSMISSION INCOMING</p>
-            <h2>GET THE NEXT<br /><span class="accent">ISSUE</span> DROPPED<br />TO YOUR INBOX.</h2>
-            <p>One email per chapter. No filler, no tracking pixels in the noscript. Just the next page of the story, the moment it's printed.</p>
-          </header>
+    <section id="join">
+      <article>
+        <header>
+          <p>// TRANSMISSION INCOMING</p>
+          <h2>GET THE NEXT<br /><mark>ISSUE</mark> DROPPED<br />TO YOUR INBOX.</h2>
+          <p>One email per chapter. No filler, no tracking pixels in the noscript. Just the next page of the story, the moment it's printed.</p>
+        </header>
 
-          <form class="join-form" onsubmit="event.preventDefault(); this.classList.add('submitted');">
-            <label for="reader-email">READER ID — EMAIL</label>
-            <input id="reader-email" type="email" required placeholder="agent@kickershoe.zine" />
-            <button type="submit">
-              <span>SEND ME ISSUE 002</span><span>→</span>
-            </button>
-            <p class="form-foot">UNSUBSCRIBE WITH A SHED OF SKIN</p>
-            <p class="form-success">RECEIVED. THE MANTIS HAS YOUR FREQUENCY.</p>
-          </form>
-        </div>
+        <form>
+          <label>
+            READER ID — EMAIL
+            <input type="email" required placeholder="agent@kickershoe.zine" />
+          </label>
+          <button type="submit">
+            <span>SEND ME ISSUE 002</span><span>→</span>
+          </button>
+          <p>UNSUBSCRIBE WITH A SHED OF SKIN</p>
+          <p hidden>RECEIVED. THE MANTIS HAS YOUR FREQUENCY.</p>
+        </form>
       </article>
     </section>
   </main>
 
-  <footer class="site-footer">
+  <footer>
     <p>© KICKERSHOE COMICS — PRINTED IN THE GRASS</p>
-    <p><span>ISSN 0042-1996</span> <span class="accent">EST. 2026</span></p>
+    <p><span>ISSN 0042-1996</span> <mark>EST. 2026</mark></p>
   </footer>
 
-  <button class="sound-toggle" aria-label="Toggle ambient sound" onclick="this.classList.toggle('on'); this.querySelector('.sfx-label').textContent = this.classList.contains('on') ? 'SFX ON' : 'SFX OFF';">
-    <span class="dot"></span>
-    <span class="sfx-label">SFX OFF</span>
+  <button aria-label="Toggle ambient sound" aria-pressed="false">
+    <span></span>
+    <span>SFX OFF</span>
   </button>
+
+  <script>
+    document.querySelector('body > button[aria-label="Toggle ambient sound"]').addEventListener('click', function () {
+      var pressed = this.getAttribute('aria-pressed') === 'true';
+      this.setAttribute('aria-pressed', String(!pressed));
+      this.querySelector('span:last-child').textContent = !pressed ? 'SFX ON' : 'SFX OFF';
+    });
+
+    document.querySelector('#join form').addEventListener('submit', function (event) {
+      event.preventDefault();
+      var form = this;
+      var success = form.querySelector('p:last-of-type');
+      Array.prototype.forEach.call(form.children, function (child) {
+        if (child !== success) child.hidden = true;
+      });
+      success.hidden = false;
+    });
+  </script>
 
   <!-- Vercel Speed Insights (vendored via npm run build, see scripts/build.js) -->
   <script type="module" src="assets/js/speed-insights-init.js"></script>
