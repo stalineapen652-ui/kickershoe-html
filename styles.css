@@ -744,6 +744,15 @@ main:has(> a:first-child) > section:nth-of-type(2) li {
   overflow: hidden;
   box-shadow: 8px 8px 0 0 var(--ink), 8px 8px 0 4px var(--bone);
   background: var(--ink);
+  /* Named view-timeline anchored on li itself. Its descendants (img, figure,
+     word spans) reference this by name instead of using animation-timeline:
+     view() directly — an anonymous view() timeline resolves against the
+     nearest scroll container, and li's own overflow:hidden makes li that
+     container, so a descendant's view() tracks li's tiny internal scrollport
+     instead of the page. That left the reveal animation stuck at its 0%
+     keyframe (opacity: 0) forever — the "invisible caption" bug. */
+  view-timeline-name: --frame-reveal;
+  view-timeline-axis: block;
 }
 main:has(> a:first-child) > section:nth-of-type(2) li img {
   width: 100%; height: 100%; object-fit: cover;
@@ -810,7 +819,7 @@ main:has(> a:first-child) > section:nth-of-type(2) li:nth-of-type(5n+2) figure {
   main:has(> a:first-child) > section:nth-of-type(2) li img,
   main:has(> a:first-child) > section:nth-of-type(2) li figure,
   main:has(> a:first-child) > section:nth-of-type(2) li figure p span {
-    animation-timeline: view();
+    animation-timeline: --frame-reveal;
     animation-range: entry 0% cover 35%;
     animation-fill-mode: both;
   }
