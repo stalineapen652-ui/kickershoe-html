@@ -1,6 +1,6 @@
 # KICKERSHOE
 
-An interactive motion-comic site for **KICKERSHOE** — a football boot brand told through comic-book lore. Issue 001, *The Mantis Origin*, follows a praying mantis whose broken leg inspired the boot that became a legend.
+An interactive motion-comic site for **KICKERSHOE** — a sneaker brand told through comic-book lore. Issue 001, *The Mantis Origin*, follows a praying mantis whose broken leg inspired the boot that became a legend. Issue 002, *The Elephant in the Room*, tells the (unofficial) origin story of the Converse Originals.
 
 **Live site:** deployed via Vercel (see [Deployment](#deployment))
 **Repository:** https://github.com/stalineapen652-ui/kickershoe-html
@@ -9,8 +9,11 @@ An interactive motion-comic site for **KICKERSHOE** — a football boot brand to
 
 This project is a static, hand-built website — no CMS, no JavaScript framework. Pages are plain HTML with a single shared stylesheet, styled around a torn-paper / halftone comic aesthetic with scroll-driven animation.
 
+Markup is written **fully semantic**: no `<div>`, no `class` attribute anywhere, and `id` used only where HTML has no alternative (in-page anchor targets). Styling in `styles.css` is driven by element type, structural combinators, and attribute selectors instead of classes — see the design notes in [`docs/superpowers/specs/`](docs/superpowers/specs/) for the approach.
+
 - [`index.html`](index.html) — landing page: hero, issue library, "the shoe" case file, lore archive, newsletter signup
 - [`issue-001.html`](issue-001.html) — the full Issue 001 motion comic, panel by panel
+- [`issue-002.html`](issue-002.html) — the full Issue 002 motion comic, panel by panel
 
 ## Tech Stack
 
@@ -28,6 +31,7 @@ This project is a static, hand-built website — no CMS, no JavaScript framework
 kickershoe-html/
 ├── index.html              # Landing page
 ├── issue-001.html          # Issue 001 motion comic
+├── issue-002.html          # Issue 002 motion comic
 ├── styles.css              # Shared stylesheet for all pages
 ├── assets/
 │   ├── images/              # Comic panels, covers, product shots (WebP)
