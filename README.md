@@ -2,7 +2,7 @@
 
 An interactive motion-comic site for **KICKERSHOE** — a sneaker brand told through comic-book lore. Issue 001, *The Mantis Origin*, follows a praying mantis whose broken leg inspired the boot that became a legend. Issue 002, *The Elephant in the Room*, tells the (unofficial) origin story of the Converse Originals. Issue 003, *The Goat OG*, follows an undersized underdog boxer whose fight against bigger rivals — and the rival who became a believer — inspired the F50 boot.
 
-**Live site:** deployed via Vercel (see [Deployment](#deployment))
+**Live site:** https://kickershoe.com (deployed via Vercel, see [Deployment](#deployment))
 **Repository:** https://github.com/stalineapen652-ui/kickershoe-html
 
 ## About
@@ -15,6 +15,7 @@ Markup is written **fully semantic**: no `<div>`, no `class` attribute anywhere,
 - [`issue-001.html`](issue-001.html) — the full Issue 001 motion comic, panel by panel
 - [`issue-002.html`](issue-002.html) — the full Issue 002 motion comic, panel by panel
 - [`issue-003.html`](issue-003.html) — the full Issue 003 motion comic, panel by panel
+- [`about.html`](about.html) — the KICKERSHOE concept: what the shared universe is, how issues connect through recurring rivals, the cast, and a "not affiliated" disclaimer
 
 ## Tech Stack
 
@@ -34,7 +35,10 @@ kickershoe-html/
 ├── issue-001.html          # Issue 001 motion comic
 ├── issue-002.html          # Issue 002 motion comic
 ├── issue-003.html          # Issue 003 motion comic
+├── about.html              # About the KICKERSHOE universe
 ├── styles.css              # Shared stylesheet for all pages
+├── sitemap.xml              # XML sitemap for search engines
+├── robots.txt                # Crawl rules + sitemap pointer
 ├── assets/
 │   ├── images/              # Comic panels, covers, product shots (WebP)
 │   ├── logo/                 # Brand logo
@@ -70,6 +74,12 @@ The site is hosted on **Vercel**, connected directly to this GitHub repository:
 - Vercel runs `npm run build` (see [`vercel.json`](vercel.json)) and serves the repo root as static output — no server-side rendering.
 - Long-lived assets (`/assets/*`) are cached for a year (`immutable`); `styles.css` is cached for an hour and revalidated on change.
 - **Vercel Speed Insights** is embedded on every page to track real-user Core Web Vitals (LCP, CLS, INP) from the Vercel dashboard.
+
+## SEO
+
+Every page ships a unique `<title>`/description, a canonical tag, Open Graph + Twitter Card previews (so shared comic panels render as real image cards on Reddit/Discord/Twitter), and JSON-LD structured data (`Organization` on the homepage, `ComicIssue` + `BreadcrumbList` on each issue, `AboutPage` on `about.html`). `sitemap.xml` and `robots.txt` live at the repo root and both assume the production domain `kickershoe.com` — update them (and every `canonical`/`og:url`/JSON-LD `url` field) if that domain changes. `cleanUrls` in `vercel.json` means these all resolve without the `.html` extension in production.
+
+Off-site distribution (submitting the sitemap to Google Search Console, mirroring issues to a platform like Webtoon Canvas or Tapas, cross-posting panels) isn't automated by anything in this repo and is on whoever runs the site to do.
 
 ## License
 
