@@ -1,6 +1,6 @@
 # KICKERSHOE
 
-An interactive motion-comic site for **KICKERSHOE** — a sneaker brand told through comic-book lore. Issue 001, *The Mantis Origin*, follows a praying mantis whose broken leg inspired the boot that became a legend. Issue 002, *The Elephant in the Room*, tells the (unofficial) origin story of the Converse Originals.
+An interactive motion-comic site for **KICKERSHOE** — a sneaker brand told through comic-book lore. Issue 001, *The Mantis Origin*, follows a praying mantis whose broken leg inspired the boot that became a legend. Issue 002, *The Elephant in the Room*, tells the (unofficial) origin story of the Converse Originals. Issue 003, *The Goat OG*, follows an undersized underdog boxer whose fight against bigger rivals — and the rival who became a believer — inspired the F50 boot.
 
 **Live site:** deployed via Vercel (see [Deployment](#deployment))
 **Repository:** https://github.com/stalineapen652-ui/kickershoe-html
@@ -14,6 +14,7 @@ Markup is written **fully semantic**: no `<div>`, no `class` attribute anywhere,
 - [`index.html`](index.html) — landing page: hero, issue library, "the shoe" case file, lore archive, newsletter signup
 - [`issue-001.html`](issue-001.html) — the full Issue 001 motion comic, panel by panel
 - [`issue-002.html`](issue-002.html) — the full Issue 002 motion comic, panel by panel
+- [`issue-003.html`](issue-003.html) — the full Issue 003 motion comic, panel by panel
 
 ## Tech Stack
 
@@ -32,6 +33,7 @@ kickershoe-html/
 ├── index.html              # Landing page
 ├── issue-001.html          # Issue 001 motion comic
 ├── issue-002.html          # Issue 002 motion comic
+├── issue-003.html          # Issue 003 motion comic
 ├── styles.css              # Shared stylesheet for all pages
 ├── assets/
 │   ├── images/              # Comic panels, covers, product shots (WebP)
