@@ -330,6 +330,48 @@
     });
   </script>
 
+  <script>
+    (function () {
+      var origin = document.querySelector('#origin');
+      var slides = [origin.querySelector(':scope > header'), origin.querySelector(':scope > article')];
+      var dots = origin.querySelectorAll(':scope > nav button');
+      var current = 0;
+      var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var autoplayTimer = null;
+
+      function showSlide(index) {
+        slides.forEach(function (slide, i) { slide.hidden = i !== index; });
+        dots.forEach(function (dot, i) { dot.setAttribute('aria-current', String(i === index)); });
+        current = index;
+      }
+
+      function stopAutoplay() {
+        if (autoplayTimer) clearInterval(autoplayTimer);
+      }
+
+      function startAutoplay() {
+        if (reduceMotion) return;
+        stopAutoplay();
+        autoplayTimer = setInterval(function () {
+          showSlide((current + 1) % slides.length);
+        }, 7000);
+      }
+
+      dots.forEach(function (dot, i) {
+        dot.addEventListener('click', function () {
+          showSlide(i);
+          startAutoplay();
+        });
+      });
+
+      origin.addEventListener('mouseenter', stopAutoplay);
+      origin.addEventListener('mouseleave', startAutoplay);
+
+      showSlide(0);
+      startAutoplay();
+    })();
+  </script>
+
   <!-- Vercel Speed Insights (vendored via npm run build, see scripts/build.js) -->
   <script type="module" src="assets/js/speed-insights-init.js"></script>
 
