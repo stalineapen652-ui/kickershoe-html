@@ -79,6 +79,61 @@
           <span>SCROLL</span>
         </p>
       </header>
+
+      <article hidden>
+        <svg id="hero-ink-wobble-defs" aria-hidden="true" style="position:absolute;width:0;height:0">
+          <filter id="hero-ink-wobble">
+            <feTurbulence type="fractalNoise" baseFrequency="0.01 0.06" numOctaves="2" seed="4" result="n" />
+            <feDisplacementMap in="SourceGraphic" in2="n" scale="10" xChannelSelector="R" yChannelSelector="G" />
+          </filter>
+        </svg>
+
+        <p>// THE UNIVERSE</p>
+
+        <ul>
+          <li aria-expanded="false">
+            <img src="assets/images/issue-001/1friends.webp" alt="The mantis and his frog friend hidden in the tall grass at night" />
+            <data value="01">01</data>
+            <footer>
+              <h3>THE MANTIS ORIGIN</h3>
+              <p>A shoe born from a broken leg and a quiet vow.</p>
+              <a href="issue-001.html"><span>READ ISSUE 001</span><span>→</span></a>
+            </footer>
+          </li>
+          <li aria-expanded="false">
+            <img src="assets/images/issue-002/1dribble.webp" alt="A young elephant dribbling a basketball alone on a city street court at night" />
+            <data value="02">02</data>
+            <footer>
+              <h3>THE ELEPHANT IN THE ROOM</h3>
+              <p>A basketball dream, a broken hop, and the high-top that started it all.</p>
+              <a href="issue-002.html"><span>READ ISSUE 002</span><span>→</span></a>
+            </footer>
+          </li>
+          <li aria-expanded="false">
+            <img src="assets/images/issue-003/1locker.webp" alt="A goat boxer sitting alone in a dim locker room, wrapping his hands" />
+            <data value="03">03</data>
+            <footer>
+              <h3>THE GOAT OG</h3>
+              <p>An undersized goat, a ring stacked against him, and the boot forged in defeat.</p>
+              <a href="issue-003.html"><span>READ ISSUE 003</span><span>→</span></a>
+            </footer>
+          </li>
+          <li aria-expanded="false">
+            <img src="assets/images/covers/cover-004.webp" alt="Cover art for Tunnel of Ghosts — Issue 004, coming soon" />
+            <data value="04">04</data>
+            <footer>
+              <h3>TUNNEL OF GHOSTS</h3>
+              <p>The next chapter is still being inked.</p>
+              <span>SOON</span>
+            </footer>
+          </li>
+        </ul>
+      </article>
+
+      <nav aria-label="Hero slides">
+        <button aria-current="true"><span></span><span>SLIDE 1 — ORIGIN</span></button>
+        <button aria-current="false"><span></span><span>SLIDE 2 — THE UNIVERSE</span></button>
+      </nav>
     </section>
 
     <!-- ============ ISSUES ============ -->
