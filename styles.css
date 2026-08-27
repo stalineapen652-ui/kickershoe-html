@@ -48,6 +48,68 @@ main > section:first-of-type > p:first-child {
   display: block;
 }
 
+/* ============ Icon Marks (site-wide) ============
+   Hand-drawn single-stroke SVG marks, referenced via <use> against a
+   per-page <symbol> sprite (see the hidden <svg> right after <body> on
+   every page). Decorative only — every instance is aria-hidden. */
+.icon-mark {
+  width: 20px;
+  height: 20px;
+  overflow: visible;
+  vertical-align: -5px;
+  margin-right: 8px;
+  flex-shrink: 0;
+}
+.icon-mark--sm {
+  width: 15px;
+  height: 15px;
+  vertical-align: -3px;
+  margin-right: 5px;
+}
+.icon-mark path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: url(#icon-wobble);
+}
+.icon-mark .dot {
+  fill: var(--primary);
+  stroke: none;
+  opacity: 0.6;
+}
+
+/* Draw-in + pulse only where the icon sits inside something interactive —
+   static placements (eyebrows, footer, badges) render fully drawn. */
+a .icon-mark path,
+button .icon-mark path {
+  stroke-dasharray: 220;
+  stroke-dashoffset: 220;
+  transition: stroke-dashoffset 0.5s ease;
+}
+a:hover .icon-mark path,
+button:hover .icon-mark path {
+  stroke-dashoffset: 0;
+}
+a:hover .icon-mark .dot,
+button:hover .icon-mark .dot {
+  opacity: 1;
+  animation: icon-dot-pulse 1s ease-in-out infinite;
+}
+@keyframes icon-dot-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.6); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .icon-mark path,
+  .icon-mark .dot {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
 /* ============ Header ============ */
 body > header {
   position: fixed; top: 0; left: 0; right: 0; z-index: 50;
@@ -527,7 +589,7 @@ body > header > nav a:last-child:hover { background: transparent; color: var(--p
 }
 #issues article > span,
 #issues article > mark {
-  position: absolute; top: 12px; left: 60px;
+  position: absolute; top: 12px; left: 86px;
   border: 1px solid var(--bone);
   color: var(--bone);
   padding: 4px 8px;
