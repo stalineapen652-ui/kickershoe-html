@@ -286,9 +286,9 @@ In `styles.css`, insert the following immediately before the `/* ============ Is
 
 @media (max-width: 720px) {
   #origin > article > ul { flex-direction: column; }
-  #origin > article li { flex: none; height: 90px; transition: height 0.4s ease; }
-  #origin > article li[aria-expanded="true"] { height: 320px; }
-  #origin > article > ul:has(li[aria-expanded="true"]) li:not([aria-expanded="true"]) { flex: none; }
+  #origin > article li { flex: 1 1 0%; transition: flex-grow 0.5s cubic-bezier(0.2, 0.8, 0.2, 1); }
+  #origin > article > ul:has(li[aria-expanded="true"]) li:not([aria-expanded="true"]) { flex: 0.4 1 0%; }
+  #origin > article li[aria-expanded="true"] { flex: 4 1 0%; }
   #origin > article li:not(:last-child)::after {
     top: auto; bottom: -2px; right: 0; width: 100%; height: 5px;
   }

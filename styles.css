@@ -294,6 +294,185 @@ body > header > nav a:last-child:hover { background: transparent; color: var(--p
 }
 #origin > header > a:hover > span { background: transparent; color: var(--primary); }
 
+/* ============ Hero Slider — Slide 2: Four Stories ============ */
+#origin > article {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  overflow: hidden;
+}
+
+#origin > article > p {
+  position: absolute;
+  top: 24px; left: 32px;
+  z-index: 4;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  color: var(--primary);
+}
+
+#origin > article > ul {
+  list-style: none;
+  display: flex;
+  height: 100%;
+}
+
+#origin > article li {
+  position: relative;
+  flex: 1 1 0%;
+  height: 100%;
+  overflow: hidden;
+  cursor: pointer;
+  background: var(--ink);
+  transition: flex-grow 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+#origin > article > ul:has(li[aria-expanded="true"]) li:not([aria-expanded="true"]) {
+  flex: 0.5 1 0%;
+}
+#origin > article li[aria-expanded="true"] {
+  flex: 6 1 0%;
+}
+
+#origin > article li::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, var(--ink) 0%, rgba(5, 5, 5, 0.25) 45%, rgba(5, 5, 5, 0.6) 100%);
+  z-index: 2;
+}
+
+#origin > article li:not(:last-child)::after {
+  content: '';
+  position: absolute; top: 0; right: -2px; width: 5px; height: 100%;
+  z-index: 3;
+  background: var(--bone);
+  filter: url(#hero-ink-wobble);
+}
+
+#origin > article li img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: opacity 0.3s ease;
+}
+
+#origin > article li data {
+  position: absolute; top: 16px; left: 12px;
+  z-index: 4;
+  background: var(--primary); color: var(--ink);
+  padding: 4px 8px;
+  font-size: 9px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.2em;
+}
+
+#origin > article li footer {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  z-index: 4;
+  padding: 16px;
+  display: flex; flex-direction: column; align-items: flex-start; gap: 10px;
+}
+
+#origin > article li footer h3 {
+  font-family: var(--font-display);
+  color: var(--bone);
+  font-size: 13px; letter-spacing: 0.1em;
+  writing-mode: vertical-rl; text-orientation: mixed;
+  white-space: nowrap;
+}
+#origin > article li[aria-expanded="true"] footer h3 {
+  writing-mode: horizontal-tb;
+  font-size: clamp(22px, 3vw, 34px);
+  line-height: 1.05;
+}
+
+#origin > article li footer p,
+#origin > article li footer a,
+#origin > article li footer > span {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.3s ease 0.1s, transform 0.3s ease 0.1s;
+  pointer-events: none;
+}
+#origin > article li[aria-expanded="true"] footer p,
+#origin > article li[aria-expanded="true"] footer a,
+#origin > article li[aria-expanded="true"] footer > span {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+#origin > article li footer p {
+  max-width: 340px;
+  font-size: 13px; line-height: 1.5;
+  color: rgba(241, 236, 224, 0.85);
+}
+#origin > article li footer a {
+  display: inline-flex; align-items: center; gap: 8px;
+  border: 2px solid var(--primary);
+  background: var(--primary); color: var(--ink);
+  font-family: var(--font-display);
+  font-size: 14px; letter-spacing: 0.05em;
+  padding: 8px 14px;
+  transition: background 0.2s, color 0.2s;
+}
+#origin > article li footer a:hover { background: transparent; color: var(--primary); }
+#origin > article li footer > span {
+  display: inline-flex;
+  border: 2px solid var(--bone);
+  color: var(--bone);
+  font-family: var(--font-mono);
+  font-size: 10px; text-transform: uppercase; letter-spacing: 0.2em;
+  padding: 6px 12px;
+}
+
+/* ============ Hero Slider — Dots ============ */
+#origin > nav {
+  position: absolute; bottom: 20px; left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+  display: flex; gap: 10px;
+}
+#origin > nav button {
+  display: flex; align-items: center; gap: 8px;
+  border: 2px solid rgba(241, 236, 224, 0.35);
+  background: rgba(5, 5, 5, 0.6);
+  color: rgba(241, 236, 224, 0.6);
+  padding: 6px 12px;
+  font-family: var(--font-mono);
+  font-size: 9px; text-transform: uppercase; letter-spacing: 0.2em;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+}
+#origin > nav button > span:first-child {
+  display: inline-block; width: 6px; height: 6px; border-radius: 50%;
+  background: rgba(241, 236, 224, 0.4);
+}
+#origin > nav button[aria-current="true"] { border-color: var(--primary); color: var(--bone); }
+#origin > nav button[aria-current="true"] > span:first-child { background: var(--primary); }
+
+@media (max-width: 720px) {
+  #origin > article > ul { flex-direction: column; }
+  #origin > article li { flex: 1 1 0%; transition: flex-grow 0.5s cubic-bezier(0.2, 0.8, 0.2, 1); }
+  #origin > article > ul:has(li[aria-expanded="true"]) li:not([aria-expanded="true"]) { flex: 0.4 1 0%; }
+  #origin > article li[aria-expanded="true"] { flex: 4 1 0%; }
+  #origin > article li:not(:last-child)::after {
+    top: auto; bottom: -2px; right: 0; width: 100%; height: 5px;
+  }
+  #origin > article li footer h3 { writing-mode: horizontal-tb; font-size: 15px; }
+  #origin > article li[aria-expanded="true"] footer h3 { font-size: 22px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #origin > article li,
+  #origin > article li footer h3,
+  #origin > article li footer p,
+  #origin > article li footer a,
+  #origin > article li footer > span,
+  #origin > article li img {
+    transition: none !important;
+  }
+}
+
 /* ============ Issues ============ */
 #issues {
   border-top: 4px solid var(--bone);
