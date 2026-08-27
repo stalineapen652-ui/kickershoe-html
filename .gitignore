@@ -15,3 +15,6 @@ Thumbs.db
 *.zip
 *.pdf
 .superpowers/
+
+# Claude Code local settings (personal permission allowlist, not shared)
+.claude/settings.local.json
