@@ -54,7 +54,7 @@
 
     <!-- ============ HERO ============ -->
     <section id="origin">
-      <header>
+      <header hidden>
         <p>
           ISSUE 001 — A KICKERSHOE COMIC
         </p>
@@ -80,7 +80,7 @@
         </p>
       </header>
 
-      <article hidden>
+      <article>
         <svg id="hero-ink-wobble-defs" aria-hidden="true" style="position:absolute;width:0;height:0">
           <filter id="hero-ink-wobble">
             <feTurbulence type="fractalNoise" baseFrequency="0.01 0.06" numOctaves="2" seed="4" result="n" />
@@ -131,13 +131,13 @@
       </article>
 
       <nav aria-label="Hero slides">
-        <button aria-current="true"><span></span><span>SLIDE 1 — ORIGIN</span></button>
-        <button aria-current="false"><span></span><span>SLIDE 2 — THE UNIVERSE</span></button>
+        <button aria-current="true"><span></span><span>SLIDE 1 — THE UNIVERSE</span></button>
+        <button aria-current="false"><span></span><span>SLIDE 2 — ORIGIN</span></button>
       </nav>
     </section>
 
     <!-- ============ ISSUES ============ -->
-    <section id="issues">
+    <section id="issues" hidden>
       <header>
         <p>// THE LIBRARY</p>
         <h2>ISSUES</h2>
@@ -333,8 +333,9 @@
   <script>
     (function () {
       var origin = document.querySelector('#origin');
-      var slides = [origin.querySelector(':scope > header'), origin.querySelector(':scope > article')];
+      var slides = [origin.querySelector(':scope > article'), origin.querySelector(':scope > header')];
       var dots = origin.querySelectorAll(':scope > nav button');
+      var issuesSection = document.querySelector('#issues');
       var current = 0;
       var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       var autoplayTimer = null;
@@ -342,6 +343,7 @@
       function showSlide(index) {
         slides.forEach(function (slide, i) { slide.hidden = i !== index; });
         dots.forEach(function (dot, i) { dot.setAttribute('aria-current', String(i === index)); });
+        if (issuesSection) issuesSection.hidden = index === 0;
         current = index;
       }
 
