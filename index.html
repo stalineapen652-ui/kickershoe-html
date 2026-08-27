@@ -369,6 +369,68 @@
 
       showSlide(0);
       startAutoplay();
+
+      var panelImages = [
+        ['assets/images/issue-001/1friends.webp', 'assets/images/issue-001/6shoe.webp', 'assets/images/issue-001/9backside.webp'],
+        ['assets/images/issue-002/1dribble.webp', 'assets/images/issue-002/5spring-shoe.webp', 'assets/images/issue-002/8world.webp'],
+        ['assets/images/issue-003/1locker.webp', 'assets/images/issue-003/8victory.webp', 'assets/images/issue-003/12f50.webp'],
+        ['assets/images/covers/cover-004.webp']
+      ];
+      var canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+      var panels = origin.querySelectorAll(':scope > article > ul > li');
+
+      panels.forEach(function (li, i) {
+        var img = li.querySelector('img');
+        var imgs = panelImages[i];
+        var cycleTimer = null;
+        var lastIndex = 0;
+
+        function startCycle() {
+          if (reduceMotion || imgs.length < 2) return;
+          cycleTimer = setInterval(function () {
+            var next = lastIndex;
+            while (next === lastIndex) next = Math.floor(Math.random() * imgs.length);
+            lastIndex = next;
+            img.style.opacity = 0;
+            setTimeout(function () {
+              img.src = imgs[next];
+              img.style.opacity = 1;
+            }, 300);
+          }, 2100);
+        }
+
+        function stopCycle() {
+          clearInterval(cycleTimer);
+          lastIndex = 0;
+          img.src = imgs[0];
+          img.style.opacity = 1;
+        }
+
+        function expand() {
+          panels.forEach(function (other) { other.setAttribute('aria-expanded', 'false'); });
+          li.setAttribute('aria-expanded', 'true');
+          startCycle();
+        }
+
+        function collapse() {
+          li.setAttribute('aria-expanded', 'false');
+          stopCycle();
+        }
+
+        if (canHover) {
+          li.addEventListener('mouseenter', expand);
+          li.addEventListener('mouseleave', collapse);
+        } else {
+          li.addEventListener('click', function (event) {
+            if (event.target.closest('a')) return;
+            if (li.getAttribute('aria-expanded') === 'true') {
+              collapse();
+            } else {
+              expand();
+            }
+          });
+        }
+      });
     })();
   </script>
 
