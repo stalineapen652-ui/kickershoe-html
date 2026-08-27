@@ -14,3 +14,4 @@ Thumbs.db
 # Source archives & docs (not part of the deployed site)
 *.zip
 *.pdf
+.superpowers/
