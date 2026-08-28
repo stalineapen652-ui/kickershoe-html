@@ -330,6 +330,17 @@
     <span>SFX OFF</span>
   </button>
 
+  <aside aria-label="Cookie notice" hidden>
+    <p>
+      <svg class="icon-mark" viewBox="0 0 64 64" aria-hidden="true"><path d="M16 18 H48 V38 Q48 42 44 42 H28 L20 50 V42 H20 Q16 42 16 38 Z"/><circle class="dot" cx="32" cy="29" r="3"/></svg>
+      // COOKIE FILE — a few crumbs for anonymous performance stats and to remember this choice. No ad trackers, no resale.
+    </p>
+    <span>
+      <button type="button" data-consent="decline">DECLINE</button>
+      <button type="button" data-consent="accept">ACCEPT</button>
+    </span>
+  </aside>
+
   <script>
     document.querySelector('body > button[aria-label="Toggle ambient sound"]').addEventListener('click', function () {
       var pressed = this.getAttribute('aria-pressed') === 'true';
@@ -454,8 +465,40 @@
     })();
   </script>
 
-  <!-- Vercel Speed Insights (vendored via npm run build, see scripts/build.js) -->
-  <script type="module" src="assets/js/speed-insights-init.js"></script>
+  <script>
+    (function () {
+      var KEY = 'kickershoe-cookie-consent';
+      var notice = document.querySelector('body > aside[aria-label="Cookie notice"]');
+      var saved = null;
+      try { saved = localStorage.getItem(KEY); } catch (e) {}
+
+      function loadSpeedInsights() {
+        if (document.querySelector('script[data-speed-insights]')) return;
+        var s = document.createElement('script');
+        s.type = 'module';
+        s.src = 'assets/js/speed-insights-init.js';
+        s.setAttribute('data-speed-insights', '');
+        document.body.appendChild(s);
+      }
+
+      if (!saved && notice) {
+        notice.hidden = false;
+      } else if (saved === 'accepted') {
+        loadSpeedInsights();
+      }
+
+      if (notice) {
+        notice.querySelectorAll('button').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            var choice = btn.getAttribute('data-consent') === 'accept' ? 'accepted' : 'declined';
+            try { localStorage.setItem(KEY, choice); } catch (e) {}
+            notice.hidden = true;
+            if (choice === 'accepted') loadSpeedInsights();
+          });
+        });
+      }
+    })();
+  </script>
 
 </body>
 </html>

@@ -1481,3 +1481,61 @@ main:has(> a:first-child) > section:nth-of-type(2) li:nth-of-type(5n+2) figure {
 }
 #not-found > header > a:hover > span { background: transparent; color: var(--primary); }
 #community > a:hover > span { background: transparent; color: var(--primary); }
+
+/* ============ Cookie Notice ============ */
+body > aside[aria-label="Cookie notice"] {
+  position: fixed; left: 16px; right: 16px; bottom: 16px; z-index: 70;
+  max-width: 640px; margin: 0 auto;
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px;
+  background: var(--bg);
+  border: 2px solid var(--bone);
+  box-shadow: 8px 8px 0 0 var(--ink), 8px 8px 0 4px var(--bone);
+  padding: 16px 20px;
+}
+body > aside[aria-label="Cookie notice"]:not([hidden]) {
+  animation: cookie-notice-in 0.4s ease-out both;
+}
+@keyframes cookie-notice-in {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+body > aside[aria-label="Cookie notice"] > p {
+  flex: 1 1 auto;
+  min-width: 220px;
+  display: flex; align-items: flex-start; gap: 10px;
+  font-family: var(--font-mono);
+  font-size: 12px; line-height: 1.5;
+  color: rgba(241, 236, 224, 0.85);
+}
+body > aside[aria-label="Cookie notice"] > p > svg { flex-shrink: 0; margin-top: 2px; }
+
+body > aside[aria-label="Cookie notice"] > span { display: flex; gap: 10px; flex-shrink: 0; }
+body > aside[aria-label="Cookie notice"] button {
+  border: 2px solid var(--bone);
+  background: transparent; color: var(--bone);
+  font-family: var(--font-display);
+  font-size: 13px; letter-spacing: 0.05em;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+body > aside[aria-label="Cookie notice"] button[data-consent="decline"]:hover {
+  border-color: var(--primary); color: var(--primary);
+}
+body > aside[aria-label="Cookie notice"] button[data-consent="accept"] {
+  border-color: var(--primary);
+  background: var(--primary); color: var(--ink);
+}
+body > aside[aria-label="Cookie notice"] button[data-consent="accept"]:hover {
+  background: transparent; color: var(--primary);
+}
+
+@media (max-width: 720px) {
+  body > aside[aria-label="Cookie notice"] { flex-direction: column; align-items: stretch; }
+  body > aside[aria-label="Cookie notice"] > span { justify-content: flex-end; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body > aside[aria-label="Cookie notice"]:not([hidden]) { animation: none; }
+}
