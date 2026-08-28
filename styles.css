@@ -208,7 +208,8 @@ body > header > nav > a[data-cta]:hover > .pod { background: transparent; color:
 /* Halftone dot overlay (was .halftone), shared across #origin / #shoe / #join */
 #origin::before,
 #shoe::before,
-#join::before {
+#join::before,
+#not-found::before {
   content: '';
   position: absolute; inset: 0;
   background-image: radial-gradient(rgba(255,255,255,0.08) 1px, transparent 1px);
@@ -1411,4 +1412,72 @@ main:has(> a:first-child) > section:nth-of-type(2) li:nth-of-type(5n+2) figure {
   padding: 12px 24px;
   transition: background 0.2s, color 0.2s;
 }
+
+/* ============ 404 Page ============ */
+#not-found {
+  position: relative;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 135px 16px 60px;
+  overflow: hidden;
+  text-align: center;
+}
+#not-found > header { position: relative; z-index: 2; max-width: 720px; }
+
+#not-found > header > p:first-child {
+  font-size: 11px;
+  display: inline-flex; align-items: center; gap: 12px;
+}
+#not-found > header > p:first-child::before,
+#not-found > header > p:first-child::after {
+  content: '';
+  display: inline-block; width: 40px; height: 1px;
+  background: var(--primary);
+}
+
+#not-found data {
+  display: inline-block;
+  margin-top: 20px;
+  background: var(--primary); color: var(--ink);
+  padding: 4px 10px;
+  font-family: var(--font-mono);
+  font-size: 10px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.2em;
+}
+
+#not-found h1 {
+  font-family: var(--font-display);
+  font-size: clamp(40px, 8vw, 96px);
+  line-height: 0.95;
+  letter-spacing: 0.01em;
+  margin: 20px 0;
+}
+#not-found h1 mark {
+  color: var(--primary);
+  text-shadow: 0 0 40px rgba(57, 255, 20, 0.5);
+}
+
+#not-found > header > p:last-of-type {
+  max-width: 480px;
+  margin: 0 auto;
+  font-size: 14px;
+  line-height: 1.6;
+  color: rgba(241, 236, 224, 0.8);
+}
+
+#not-found > header > a {
+  margin-top: 32px;
+  display: inline-flex;
+}
+#not-found > header > a > span {
+  display: inline-flex; align-items: center; gap: 10px;
+  border: 2px solid var(--primary);
+  background: var(--primary); color: var(--ink);
+  font-family: var(--font-display);
+  font-size: 18px; letter-spacing: 0.05em;
+  padding: 12px 24px;
+  transition: background 0.2s, color 0.2s;
+}
+#not-found > header > a:hover > span { background: transparent; color: var(--primary); }
 #community > a:hover > span { background: transparent; color: var(--primary); }

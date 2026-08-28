@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>404 — This Page Ghosted You | KICKERSHOE</title>
+  <meta name="description" content="This page isn't in the archive. Not stolen, not retired — just missing. Head back to the KICKERSHOE stories." />
+  <meta name="robots" content="noindex, follow" />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ============ HEADER ============ -->
+  <header>
+    <nav aria-label="Primary">
+      <a href="index.html#issues">
+        <span class="pod"><svg class="icon-mark" viewBox="0 0 64 64" aria-hidden="true"><path d="M16 18 H48 V38 Q48 42 44 42 H28 L20 50 V42 H20 Q16 42 16 38 Z"/><circle class="dot" cx="32" cy="29" r="3"/></svg></span>
+        <span class="tag-label">Issues</span>
+      </a>
+      <a href="index.html#shoe">
+        <span class="pod"><svg class="icon-mark" viewBox="0 0 64 64" aria-hidden="true"><path d="M14 44 Q14 30 22 24 Q28 19 36 22 Q46 26 48 36 Q49 42 44 44 L16 44 Q13 44 14 40 Z"/><circle class="dot" cx="40" cy="30" r="3"/></svg></span>
+        <span class="tag-label">The Shoe</span>
+      </a>
+      <a href="index.html" data-medallion aria-label="KICKERSHOE — home">
+        <span class="pod"><img src="assets/logo/kickershoe-logo.png" alt="Kickershoe logo" /></span>
+      </a>
+      <a href="index.html#lore">
+        <span class="pod"><svg class="icon-mark" viewBox="0 0 64 64" aria-hidden="true"><path d="M16 24 H48 M16 32 H48 M16 40 H40"/><circle class="dot" cx="20" cy="18" r="3"/></svg></span>
+        <span class="tag-label">Lore</span>
+      </a>
+      <a href="about.html">
+        <span class="pod"><svg class="icon-mark" viewBox="0 0 64 64" aria-hidden="true"><path d="M16 32 Q24 20 32 32 Q40 44 48 32"/><circle class="dot" cx="32" cy="32" r="3"/></svg></span>
+        <span class="tag-label">About</span>
+      </a>
+      <a href="index.html#join" data-cta>
+        <span class="pod"><svg class="icon-mark" viewBox="0 0 64 64" aria-hidden="true"><path d="M22 16 L22 48 L46 32 Z"/><circle class="dot" cx="32" cy="32" r="3"/></svg></span>
+        <span class="tag-label">Get Issue 003</span>
+      </a>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ============ 404 ============ -->
+    <section id="not-found">
+      <header>
+        <p>
+          <svg class="icon-mark" viewBox="0 0 64 64" aria-hidden="true"><path d="M12 26 A14 14 0 1 1 40 26 A14 14 0 1 1 12 26 M36 36 L50 50"/></svg>
+          // CASE FILE — 404: MISSING
+        </p>
+
+        <data value="404">FILE #404</data>
+
+        <h1>THIS PAGE <mark data-text="GHOSTED">GHOSTED</mark> YOU</h1>
+
+        <p>
+          Even the Mantis couldn't track this one down. Not stolen, not
+          retired — it just isn't here. Classic ghost move.
+        </p>
+
+        <a href="index.html">
+          <span>BACK TO THE STORIES <span>→</span></span>
+        </a>
+      </header>
+    </section>
+
+  </main>
+
+  <footer>
+    <p><svg class="icon-mark icon-mark--sm" viewBox="0 0 64 64" aria-hidden="true"><path d="M14 44 Q14 30 22 24 Q28 19 36 22 Q46 26 48 36 Q49 42 44 44 L16 44 Q13 44 14 40 Z"/><circle class="dot" cx="40" cy="30" r="3"/></svg>© KICKERSHOE COMICS — PRINTED IN THE GRASS</p>
+    <p><svg class="icon-mark icon-mark--sm" viewBox="0 0 64 64" aria-hidden="true"><path d="M32 18 L36 28 L47 28 L38 35 L41 46 L32 39 L23 46 L26 35 L17 28 L28 28 Z"/></svg><span>ISSN 0042-1996</span> <mark>EST. 2026</mark></p>
+  </footer>
+
+  <button aria-label="Toggle ambient sound" aria-pressed="false">
+    <span></span>
+    <span>SFX OFF</span>
+  </button>
+
+  <script>
+    document.querySelector('body > button[aria-label="Toggle ambient sound"]').addEventListener('click', function () {
+      var pressed = this.getAttribute('aria-pressed') === 'true';
+      this.setAttribute('aria-pressed', String(!pressed));
+      this.querySelector('span:last-child').textContent = !pressed ? 'SFX ON' : 'SFX OFF';
+    });
+  </script>
+
+  <!-- Vercel Speed Insights (vendored via npm run build, see scripts/build.js) -->
+  <script type="module" src="assets/js/speed-insights-init.js"></script>
+
+</body>
+</html>
