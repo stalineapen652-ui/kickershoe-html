@@ -72,7 +72,6 @@ main > section:first-of-type > p:first-child {
   stroke-width: 2.6;
   stroke-linecap: round;
   stroke-linejoin: round;
-  filter: url(#icon-wobble);
 }
 .icon-mark .dot {
   fill: var(--primary);
