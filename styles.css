@@ -109,38 +109,96 @@ button:hover .icon-mark .dot {
   }
 }
 
-/* ============ Header ============ */
+/* ============ Header ============
+   "Evidence tags on a wire" — the logo (a circular medallion, no
+   wordmark) and every nav link hang off a thin horizontal wire like
+   tagged case-file exhibits, gently swinging at rest. */
 body > header {
   position: fixed; top: 0; left: 0; right: 0; z-index: 50;
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 14px 32px;
+  padding: 34px 32px 14px;
   background: rgba(10, 15, 10, 0.85);
   backdrop-filter: blur(8px);
   border-bottom: 2px solid rgba(241, 236, 224, 0.6);
 }
-
-body > header > a { display: flex; align-items: center; gap: 10px; }
-body > header > a > img {
-  display: block;
-  height: 40px;
-  width: auto;
+body > header::before {
+  content: '';
+  position: absolute; top: 34px; left: 5%; right: 5%; height: 1px;
+  background: rgba(241, 236, 224, 0.4);
 }
-body > header > a > span { font-family: var(--font-display); font-size: 22px; letter-spacing: 0.06em; }
 
-body > header > nav { display: flex; align-items: center; gap: 28px; }
-body > header > nav a {
-  font-size: 11px; text-transform: uppercase; letter-spacing: 0.25em;
-  transition: color 0.2s;
+body > header > nav {
+  position: relative;
+  display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: center;
+  gap: 32px;
 }
-body > header > nav a:hover { color: var(--primary); }
-body > header > nav a:last-child {
-  border: 2px solid var(--primary);
-  background: var(--primary); color: var(--ink) !important;
-  padding: 6px 14px;
+body > header > nav > a {
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  transform-origin: top center;
+  animation: header-tag-swing 4s ease-in-out infinite;
 }
-body > header > nav a:last-child:hover { background: transparent; color: var(--primary) !important; }
+body > header > nav > a:nth-child(even) { animation-delay: 0.4s; }
+@keyframes header-tag-swing {
+  0%, 100% { transform: rotate(-2.5deg); }
+  50% { transform: rotate(2.5deg); }
+}
+body > header > nav > a::before {
+  content: '';
+  width: 1px; height: 16px;
+  background: rgba(241, 236, 224, 0.5);
+}
 
-@media (max-width: 720px) { body > header > nav { display: none; } }
+body > header > nav > a > .pod {
+  width: 40px; height: 40px;
+  display: flex; align-items: center; justify-content: center;
+  border: 2px solid rgba(241, 236, 224, 0.35);
+  border-radius: 50%;
+  color: var(--bone);
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.25s, background 0.25s, color 0.25s;
+}
+body > header > nav > a > .pod > .icon-mark { width: 20px; height: 20px; margin: 0; vertical-align: 0; }
+body > header > nav > a:hover > .pod {
+  transform: scale(1.15) rotate(-6deg);
+  border-color: var(--primary);
+  background: rgba(57, 255, 20, 0.12);
+  color: var(--primary);
+}
+
+body > header > nav > a > .tag-label {
+  font-size: 8px; text-transform: uppercase; letter-spacing: 0.15em;
+  color: rgba(241, 236, 224, 0.7);
+  white-space: nowrap;
+  opacity: 0; transform: translateY(-4px);
+  transition: opacity 0.25s, transform 0.25s;
+}
+body > header > nav > a:hover > .tag-label { opacity: 1; transform: translateY(0); }
+
+/* The logo tag: bigger medallion, longer string, no label (it's the home link) */
+body > header > nav > a[data-medallion]::before { height: 24px; }
+body > header > nav > a[data-medallion] > .pod {
+  width: 52px; height: 52px;
+  border-radius: 50%; overflow: hidden;
+  border: 2px solid var(--bone);
+  box-shadow: 0 0 0 4px var(--bg);
+}
+body > header > nav > a[data-medallion] > .pod > img {
+  width: 100%; height: 100%; object-fit: cover;
+  transform: scale(1.6) translateY(4px);
+}
+body > header > nav > a[data-medallion]:hover > .pod { transform: scale(1.08); }
+
+/* The CTA tag: filled instead of outlined, same as the old nav-link-as-button */
+body > header > nav > a[data-cta] > .pod {
+  background: var(--primary); border-color: var(--primary); color: var(--ink);
+}
+body > header > nav > a[data-cta]:hover > .pod { background: transparent; color: var(--primary); }
+
+@media (max-width: 720px) {
+  body > header > nav > a:not([data-medallion]) { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body > header > nav > a { animation: none; }
+}
 
 /* ============ Hero ============ */
 #origin {
@@ -148,7 +206,7 @@ body > header > nav a:last-child:hover { background: transparent; color: var(--p
   min-height: 100vh;
   display: grid;
   place-items: center;
-  padding: 120px 16px 60px;
+  padding: 150px 16px 60px;
   overflow: hidden;
 }
 
@@ -931,7 +989,7 @@ body > button[aria-label="Toggle ambient sound"][aria-pressed="true"] > span:fir
 /* ============ Issue Page: Back Link ============ */
 main > a:first-child {
   display: inline-flex; align-items: center; gap: 8px;
-  margin: 120px 32px 0;
+  margin: 150px 32px 0;
   font-size: 11px; text-transform: uppercase; letter-spacing: 0.3em;
   color: rgba(241, 236, 224, 0.6);
   transition: color 0.2s;
@@ -1129,7 +1187,7 @@ main:has(> a:first-child) > section:nth-of-type(2) li:nth-of-type(5n+2) figure {
   display: grid;
   place-items: center;
   overflow: hidden;
-  padding: 120px 16px 60px;
+  padding: 150px 16px 60px;
 }
 #about ul {
   list-style: none;
@@ -1229,7 +1287,7 @@ main:has(> a:first-child) > section:nth-of-type(2) li:nth-of-type(5n+2) figure {
 }
 
 @media (max-width: 720px) {
-  #about { min-height: 90vh; padding: 110px 12px 40px; }
+  #about { min-height: 90vh; padding: 135px 12px 40px; }
   #about ul { grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(5, 1fr); }
 }
 
