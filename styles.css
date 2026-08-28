@@ -110,10 +110,10 @@ button:hover .icon-mark .dot {
 }
 
 /* ============ Header ============
-   "Radar" — no bar, no chrome: the nav floats transparently over
-   whatever's beneath it. The logo is the bare mark (no wordmark, no
-   circular crop/ring) with a looping radar-ping pulse behind it; nav
-   icons flank it left/right and echo their own ping on hover. */
+   No bar, no chrome: the nav floats transparently over whatever's
+   beneath it. The logo is the bare mark (no wordmark, no circular
+   crop/ring, no ping); nav icons flank it left/right and echo their
+   own ping on hover. */
 body > header {
   position: fixed; top: 0; left: 0; right: 0; z-index: 50;
   padding: 20px 32px;
@@ -122,12 +122,12 @@ body > header {
 body > header > nav {
   position: relative;
   display: flex; flex-wrap: wrap; align-items: center; justify-content: center;
-  gap: 40px;
+  gap: 44px;
 }
-body > header > nav > a { display: flex; align-items: center; justify-content: center; }
+body > header > nav > a { position: relative; display: flex; align-items: center; justify-content: center; }
 
 body > header > nav > a > .pod {
-  width: 40px; height: 40px;
+  width: 48px; height: 48px;
   display: flex; align-items: center; justify-content: center;
   position: relative;
   border: 2px solid rgba(241, 236, 224, 0.35);
@@ -135,7 +135,7 @@ body > header > nav > a > .pod {
   color: var(--bone);
   transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.25s, background 0.25s, color 0.25s;
 }
-body > header > nav > a > .pod > .icon-mark { width: 20px; height: 20px; margin: 0; vertical-align: 0; }
+body > header > nav > a > .pod > .icon-mark { width: 26px; height: 26px; margin: 0; vertical-align: 0; }
 body > header > nav > a:hover > .pod {
   transform: scale(1.18);
   border-color: var(--primary);
@@ -166,35 +166,18 @@ body > header > nav > a > .tag-label {
 }
 body > header > nav > a:hover > .tag-label { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-/* The logo tag: bare mark, no circle/ring/crop — a looping radar ping instead */
+/* The logo tag: bare mark, no circle/ring/crop, no ping — just the mark, bigger */
 body > header > nav > a[data-medallion] > .pod {
   width: auto; height: auto;
   border: none; border-radius: 0;
 }
 body > header > nav > a[data-medallion] > .pod > img {
-  height: 54px; width: auto;
+  height: 76px; width: auto;
   position: relative; z-index: 2;
   filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.6));
   transition: transform 0.3s;
 }
 body > header > nav > a[data-medallion]:hover > .pod > img { transform: scale(1.08); }
-body > header > nav > a[data-medallion] > .pod::before,
-body > header > nav > a[data-medallion] > .pod::after {
-  content: '';
-  position: absolute; top: 50%; left: 50%; width: 54px; height: 54px;
-  transform: translate(-50%, -50%) scale(0.6);
-  border: 1.5px solid var(--primary);
-  border-radius: 50%;
-  opacity: 0.8;
-  animation: header-ping-loop 2.6s ease-out infinite;
-  z-index: 1;
-  pointer-events: none;
-}
-body > header > nav > a[data-medallion] > .pod::after { animation-delay: 1.3s; }
-@keyframes header-ping-loop {
-  0% { transform: translate(-50%, -50%) scale(0.6); opacity: 0.8; }
-  100% { transform: translate(-50%, -50%) scale(2.4); opacity: 0; }
-}
 
 /* The CTA tag: filled instead of outlined, same as the old nav-link-as-button */
 body > header > nav > a[data-cta] > .pod {
@@ -207,8 +190,7 @@ body > header > nav > a[data-cta]:hover > .pod { background: transparent; color:
 }
 
 @media (prefers-reduced-motion: reduce) {
-  body > header > nav > a > .pod::before,
-  body > header > nav > a > .pod::after {
+  body > header > nav > a > .pod::before {
     animation: none;
   }
 }
@@ -219,7 +201,7 @@ body > header > nav > a[data-cta]:hover > .pod { background: transparent; color:
   min-height: 100vh;
   display: grid;
   place-items: center;
-  padding: 120px 16px 60px;
+  padding: 135px 16px 60px;
   overflow: hidden;
 }
 
@@ -1002,7 +984,7 @@ body > button[aria-label="Toggle ambient sound"][aria-pressed="true"] > span:fir
 /* ============ Issue Page: Back Link ============ */
 main > a:first-child {
   display: inline-flex; align-items: center; gap: 8px;
-  margin: 120px 32px 0;
+  margin: 135px 32px 0;
   font-size: 11px; text-transform: uppercase; letter-spacing: 0.3em;
   color: rgba(241, 236, 224, 0.6);
   transition: color 0.2s;
@@ -1200,7 +1182,7 @@ main:has(> a:first-child) > section:nth-of-type(2) li:nth-of-type(5n+2) figure {
   display: grid;
   place-items: center;
   overflow: hidden;
-  padding: 120px 16px 60px;
+  padding: 135px 16px 60px;
 }
 #about ul {
   list-style: none;
@@ -1300,7 +1282,7 @@ main:has(> a:first-child) > section:nth-of-type(2) li:nth-of-type(5n+2) figure {
 }
 
 @media (max-width: 720px) {
-  #about { min-height: 90vh; padding: 110px 12px 40px; }
+  #about { min-height: 90vh; padding: 125px 12px 40px; }
   #about ul { grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(5, 1fr); }
 }
 

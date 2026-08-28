@@ -49,68 +49,30 @@
 </head>
 <body>
 
-  <!-- ============ ICON SPRITE ============ -->
-  <svg aria-hidden="true" style="position:absolute;width:0;height:0">
-    <filter id="icon-wobble">
-      <feTurbulence type="fractalNoise" baseFrequency="0.09 0.13" numOctaves="2" seed="7" result="n" />
-      <feDisplacementMap in="SourceGraphic" in2="n" scale="1.4" xChannelSelector="R" yChannelSelector="G" />
-    </filter>
-    <symbol id="icon-boot" viewBox="0 0 64 64">
-      <path d="M14 44 Q14 30 22 24 Q28 19 36 22 Q46 26 48 36 Q49 42 44 44 L16 44 Q13 44 14 40 Z" />
-      <circle class="dot" cx="40" cy="30" r="3" />
-    </symbol>
-    <symbol id="icon-issue" viewBox="0 0 64 64">
-      <path d="M16 18 H48 V38 Q48 42 44 42 H28 L20 50 V42 H20 Q16 42 16 38 Z" />
-      <circle class="dot" cx="32" cy="29" r="3" />
-    </symbol>
-    <symbol id="icon-motion" viewBox="0 0 64 64">
-      <path d="M22 16 L22 48 L46 32 Z" />
-      <circle class="dot" cx="32" cy="32" r="3" />
-    </symbol>
-    <symbol id="icon-impact" viewBox="0 0 64 64">
-      <path d="M34 14 L20 36 H30 L26 50 L46 26 H36 Z" />
-      <circle class="dot" cx="32" cy="16" r="3" />
-    </symbol>
-    <symbol id="icon-lore" viewBox="0 0 64 64">
-      <path d="M16 24 H48 M16 32 H48 M16 40 H40" />
-      <circle class="dot" cx="20" cy="18" r="3" />
-    </symbol>
-    <symbol id="icon-legend" viewBox="0 0 64 64">
-      <path d="M32 18 L36 28 L47 28 L38 35 L41 46 L32 39 L23 46 L26 35 L17 28 L28 28 Z" />
-    </symbol>
-    <symbol id="icon-reader" viewBox="0 0 64 64">
-      <path d="M16 32 Q24 20 32 32 Q40 44 48 32" />
-      <circle class="dot" cx="32" cy="32" r="3" />
-    </symbol>
-    <symbol id="icon-signal" viewBox="0 0 64 64">
-      <path d="M20 20 Q32 14 44 20 Q50 32 44 44 Q32 50 20 44 Q14 32 20 20 Z M32 26 V38 M26 32 H38" />
-    </symbol>
-  </svg>
-
   <!-- ============ HEADER ============ -->
   <header>
     <nav aria-label="Primary">
       <a href="index.html#issues">
-        <span class="pod"><svg class="icon-mark" viewBox="0 0 64 64" aria-hidden="true"><use href="#icon-issue" xlink:href="#icon-issue"></use></svg></span>
+        <span class="pod"><svg class="icon-mark" viewBox="0 0 64 64" aria-hidden="true"><path d="M16 18 H48 V38 Q48 42 44 42 H28 L20 50 V42 H20 Q16 42 16 38 Z"/><circle class="dot" cx="32" cy="29" r="3"/></svg></span>
         <span class="tag-label">Issues</span>
       </a>
       <a href="index.html#shoe">
-        <span class="pod"><svg class="icon-mark" viewBox="0 0 64 64" aria-hidden="true"><use href="#icon-boot" xlink:href="#icon-boot"></use></svg></span>
+        <span class="pod"><svg class="icon-mark" viewBox="0 0 64 64" aria-hidden="true"><path d="M14 44 Q14 30 22 24 Q28 19 36 22 Q46 26 48 36 Q49 42 44 44 L16 44 Q13 44 14 40 Z"/><circle class="dot" cx="40" cy="30" r="3"/></svg></span>
         <span class="tag-label">The Shoe</span>
       </a>
       <a href="index.html" data-medallion aria-label="KICKERSHOE — home">
         <span class="pod"><img src="assets/logo/kickershoe-logo.png" alt="Kickershoe logo" /></span>
       </a>
       <a href="index.html#lore">
-        <span class="pod"><svg class="icon-mark" viewBox="0 0 64 64" aria-hidden="true"><use href="#icon-lore" xlink:href="#icon-lore"></use></svg></span>
+        <span class="pod"><svg class="icon-mark" viewBox="0 0 64 64" aria-hidden="true"><path d="M16 24 H48 M16 32 H48 M16 40 H40"/><circle class="dot" cx="20" cy="18" r="3"/></svg></span>
         <span class="tag-label">Lore</span>
       </a>
       <a href="about.html">
-        <span class="pod"><svg class="icon-mark" viewBox="0 0 64 64" aria-hidden="true"><use href="#icon-reader" xlink:href="#icon-reader"></use></svg></span>
+        <span class="pod"><svg class="icon-mark" viewBox="0 0 64 64" aria-hidden="true"><path d="M16 32 Q24 20 32 32 Q40 44 48 32"/><circle class="dot" cx="32" cy="32" r="3"/></svg></span>
         <span class="tag-label">About</span>
       </a>
       <a href="index.html#join" data-cta>
-        <span class="pod"><svg class="icon-mark" viewBox="0 0 64 64" aria-hidden="true"><use href="#icon-motion" xlink:href="#icon-motion"></use></svg></span>
+        <span class="pod"><svg class="icon-mark" viewBox="0 0 64 64" aria-hidden="true"><path d="M22 16 L22 48 L46 32 Z"/><circle class="dot" cx="32" cy="32" r="3"/></svg></span>
         <span class="tag-label">Get Issue 003</span>
       </a>
     </nav>
@@ -132,15 +94,15 @@
         <li><img src="assets/images/issue-001/9backside.webp" alt="A footballer's back, number 7, silhouetted against the city skyline" /></li>
       </ul>
       <header>
-        <p><svg class="icon-mark" viewBox="0 0 64 64" aria-hidden="true"><use href="#icon-reader" xlink:href="#icon-reader"></use></svg>// ABOUT KICKERSHOE</p>
+        <p><svg class="icon-mark" viewBox="0 0 64 64" aria-hidden="true"><path d="M16 32 Q24 20 32 32 Q40 44 48 32"/><circle class="dot" cx="32" cy="32" r="3"/></svg>// ABOUT KICKERSHOE</p>
         <h1>EVERY <mark>SHOE</mark> HAS A STORY</h1>
         <p>We're a growing archive of fictional shoe-origin comics — invented characters, real design DNA, one shared universe.</p>
         <nav aria-label="On this page">
-          <a href="#mission"><svg class="icon-mark" viewBox="0 0 64 64" aria-hidden="true"><use href="#icon-impact" xlink:href="#icon-impact"></use></svg>Mission</a>
-          <a href="#how-it-works"><svg class="icon-mark" viewBox="0 0 64 64" aria-hidden="true"><use href="#icon-lore" xlink:href="#icon-lore"></use></svg>How It Works</a>
-          <a href="#characters"><svg class="icon-mark" viewBox="0 0 64 64" aria-hidden="true"><use href="#icon-legend" xlink:href="#icon-legend"></use></svg>Characters</a>
-          <a href="#community"><svg class="icon-mark" viewBox="0 0 64 64" aria-hidden="true"><use href="#icon-signal" xlink:href="#icon-signal"></use></svg>Community</a>
-          <a href="#lore"><svg class="icon-mark" viewBox="0 0 64 64" aria-hidden="true"><use href="#icon-lore" xlink:href="#icon-lore"></use></svg>Not Affiliated</a>
+          <a href="#mission"><svg class="icon-mark" viewBox="0 0 64 64" aria-hidden="true"><path d="M34 14 L20 36 H30 L26 50 L46 26 H36 Z"/><circle class="dot" cx="32" cy="16" r="3"/></svg>Mission</a>
+          <a href="#how-it-works"><svg class="icon-mark" viewBox="0 0 64 64" aria-hidden="true"><path d="M16 24 H48 M16 32 H48 M16 40 H40"/><circle class="dot" cx="20" cy="18" r="3"/></svg>How It Works</a>
+          <a href="#characters"><svg class="icon-mark" viewBox="0 0 64 64" aria-hidden="true"><path d="M32 18 L36 28 L47 28 L38 35 L41 46 L32 39 L23 46 L26 35 L17 28 L28 28 Z"/></svg>Characters</a>
+          <a href="#community"><svg class="icon-mark" viewBox="0 0 64 64" aria-hidden="true"><path d="M20 20 Q32 14 44 20 Q50 32 44 44 Q32 50 20 44 Q14 32 20 20 Z M32 26 V38 M26 32 H38"/></svg>Community</a>
+          <a href="#lore"><svg class="icon-mark" viewBox="0 0 64 64" aria-hidden="true"><path d="M16 24 H48 M16 32 H48 M16 40 H40"/><circle class="dot" cx="20" cy="18" r="3"/></svg>Not Affiliated</a>
         </nav>
       </header>
     </section>
@@ -148,7 +110,7 @@
     <!-- ============ MISSION ============ -->
     <section id="mission">
       <header>
-        <p><svg class="icon-mark" viewBox="0 0 64 64" aria-hidden="true"><use href="#icon-impact" xlink:href="#icon-impact"></use></svg>// WHAT WE DO</p>
+        <p><svg class="icon-mark" viewBox="0 0 64 64" aria-hidden="true"><path d="M34 14 L20 36 H30 L26 50 L46 26 H36 Z"/><circle class="dot" cx="32" cy="16" r="3"/></svg>// WHAT WE DO</p>
         <h2>WE TELL THE STORIES SNEAKERS DON'T</h2>
       </header>
       <p>Every legendary shoe has an origin story nobody tells you — the version smoothed into two clean lines of marketing copy, or lost entirely. KICKERSHOE exists to tell the other version.</p>
@@ -159,7 +121,7 @@
     <!-- ============ HOW IT WORKS ============ -->
     <section id="how-it-works">
       <header>
-        <p><svg class="icon-mark" viewBox="0 0 64 64" aria-hidden="true"><use href="#icon-lore" xlink:href="#icon-lore"></use></svg>// HOW THE LORE WORKS</p>
+        <p><svg class="icon-mark" viewBox="0 0 64 64" aria-hidden="true"><path d="M16 24 H48 M16 32 H48 M16 40 H40"/><circle class="dot" cx="20" cy="18" r="3"/></svg>// HOW THE LORE WORKS</p>
         <h2>ONE UNIVERSE, EVERY RIVAL CONNECTED</h2>
       </header>
       <p>Each issue follows one character's origin — Issue 001's mantis, Issue 002's elephant, Issue 003's goat — but none of them exist in isolation. The bull who nearly ended the goat's career in Issue 003 doesn't disappear when the credits roll. He shows up at the workbench the next morning and helps design the boot.</p>
@@ -170,7 +132,7 @@
     <!-- ============ CHARACTERS ============ -->
     <section id="characters">
       <header>
-        <p><svg class="icon-mark" viewBox="0 0 64 64" aria-hidden="true"><use href="#icon-legend" xlink:href="#icon-legend"></use></svg>// THE CAST</p>
+        <p><svg class="icon-mark" viewBox="0 0 64 64" aria-hidden="true"><path d="M32 18 L36 28 L47 28 L38 35 L41 46 L32 39 L23 46 L26 35 L17 28 L28 28 Z"/></svg>// THE CAST</p>
         <h2>MEET THE UNIVERSE</h2>
       </header>
       <ul>
@@ -178,19 +140,19 @@
           <img src="assets/images/issue-001/1friends.webp" alt="The mantis, protagonist of Issue 001, in the tall grass at night" />
           <h3>THE MANTIS</h3>
           <p>Born in the wet grass, mocked for nine seasons before he ever touched a ball. His broken leg — and the exo-mesh boot built to protect it — started everything.</p>
-          <a href="issue-001.html"><svg class="icon-mark" viewBox="0 0 64 64" aria-hidden="true"><use href="#icon-motion" xlink:href="#icon-motion"></use></svg>READ ISSUE 001 <span>→</span></a>
+          <a href="issue-001.html"><svg class="icon-mark" viewBox="0 0 64 64" aria-hidden="true"><path d="M22 16 L22 48 L46 32 Z"/><circle class="dot" cx="32" cy="32" r="3"/></svg>READ ISSUE 001 <span>→</span></a>
         </li>
         <li>
           <img src="assets/images/issue-002/1dribble.webp" alt="The elephant, protagonist of Issue 002, dribbling a basketball at night" />
           <h3>THE ELEPHANT</h3>
           <p>Too heavy to jump, too stubborn to quit. His mother's spring-loaded fix got stolen once — and copied by everyone else ever since.</p>
-          <a href="issue-002.html"><svg class="icon-mark" viewBox="0 0 64 64" aria-hidden="true"><use href="#icon-motion" xlink:href="#icon-motion"></use></svg>READ ISSUE 002 <span>→</span></a>
+          <a href="issue-002.html"><svg class="icon-mark" viewBox="0 0 64 64" aria-hidden="true"><path d="M22 16 L22 48 L46 32 Z"/><circle class="dot" cx="32" cy="32" r="3"/></svg>READ ISSUE 002 <span>→</span></a>
         </li>
         <li>
           <img src="assets/images/issue-003/1locker.webp" alt="The goat, protagonist of Issue 003, wrapping his hands in a dim locker room" />
           <h3>THE GOAT</h3>
           <p>Too small for the weight class, too relentless to stay down. The rival he flattened in the final round became the designer standing next to him.</p>
-          <a href="issue-003.html"><svg class="icon-mark" viewBox="0 0 64 64" aria-hidden="true"><use href="#icon-motion" xlink:href="#icon-motion"></use></svg>READ ISSUE 003 <span>→</span></a>
+          <a href="issue-003.html"><svg class="icon-mark" viewBox="0 0 64 64" aria-hidden="true"><path d="M22 16 L22 48 L46 32 Z"/><circle class="dot" cx="32" cy="32" r="3"/></svg>READ ISSUE 003 <span>→</span></a>
         </li>
       </ul>
     </section>
@@ -198,11 +160,11 @@
     <!-- ============ COMMUNITY ============ -->
     <section id="community">
       <header>
-        <p><svg class="icon-mark" viewBox="0 0 64 64" aria-hidden="true"><use href="#icon-signal" xlink:href="#icon-signal"></use></svg>// JOIN THE ROSTER</p>
+        <p><svg class="icon-mark" viewBox="0 0 64 64" aria-hidden="true"><path d="M20 20 Q32 14 44 20 Q50 32 44 44 Q32 50 20 44 Q14 32 20 20 Z M32 26 V38 M26 32 H38"/></svg>// JOIN THE ROSTER</p>
         <h2>YOUR CHARACTER COULD BE NEXT</h2>
       </header>
       <p>KICKERSHOE keeps growing the same way every good shared universe does — one contributor, one rival, one shoe at a time. If you've got a character, a shoe, or a grudge that deserves its own file, the newsletter is where new issues — and open invitations to pitch one — get announced first.</p>
-      <a href="index.html#join"><span><svg class="icon-mark" viewBox="0 0 64 64" aria-hidden="true"><use href="#icon-signal" xlink:href="#icon-signal"></use></svg>GET THE NEXT ISSUE <span>→</span></span></a>
+      <a href="index.html#join"><span><svg class="icon-mark" viewBox="0 0 64 64" aria-hidden="true"><path d="M20 20 Q32 14 44 20 Q50 32 44 44 Q32 50 20 44 Q14 32 20 20 Z M32 26 V38 M26 32 H38"/></svg>GET THE NEXT ISSUE <span>→</span></span></a>
     </section>
 
     <!-- ============ NOT AFFILIATED (reuses #lore) ============ -->
@@ -221,7 +183,7 @@
       </p>
 
       <header>
-        <p><svg class="icon-mark" viewBox="0 0 64 64" aria-hidden="true"><use href="#icon-lore" xlink:href="#icon-lore"></use></svg>// THE FINE PRINT</p>
+        <p><svg class="icon-mark" viewBox="0 0 64 64" aria-hidden="true"><path d="M16 24 H48 M16 32 H48 M16 40 H40"/><circle class="dot" cx="20" cy="18" r="3"/></svg>// THE FINE PRINT</p>
         <h2>NOT AFFILIATED</h2>
       </header>
 
@@ -253,8 +215,8 @@
   </main>
 
   <footer>
-    <p><svg class="icon-mark icon-mark--sm" viewBox="0 0 64 64" aria-hidden="true"><use href="#icon-boot" xlink:href="#icon-boot"></use></svg>© KICKERSHOE COMICS — PRINTED IN THE GRASS</p>
-    <p><svg class="icon-mark icon-mark--sm" viewBox="0 0 64 64" aria-hidden="true"><use href="#icon-legend" xlink:href="#icon-legend"></use></svg><span>ISSN 0042-1996</span> <mark>EST. 2026</mark></p>
+    <p><svg class="icon-mark icon-mark--sm" viewBox="0 0 64 64" aria-hidden="true"><path d="M14 44 Q14 30 22 24 Q28 19 36 22 Q46 26 48 36 Q49 42 44 44 L16 44 Q13 44 14 40 Z"/><circle class="dot" cx="40" cy="30" r="3"/></svg>© KICKERSHOE COMICS — PRINTED IN THE GRASS</p>
+    <p><svg class="icon-mark icon-mark--sm" viewBox="0 0 64 64" aria-hidden="true"><path d="M32 18 L36 28 L47 28 L38 35 L41 46 L32 39 L23 46 L26 35 L17 28 L28 28 Z"/></svg><span>ISSN 0042-1996</span> <mark>EST. 2026</mark></p>
   </footer>
 
   <button aria-label="Toggle ambient sound" aria-pressed="false">
