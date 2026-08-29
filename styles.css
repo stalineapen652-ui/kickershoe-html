@@ -815,13 +815,39 @@ body > nav[aria-label="Primary"] > a:hover > span { opacity: 1; transform: trans
 #lore { border-top: 4px solid var(--bone); }
 
 #lore > p:first-child {
-  height: 90px;
-  border-block: 2px solid var(--bone);
-  background-color: var(--bone);
-  background-image: url('assets/patterns/spiral-band.svg');
-  background-repeat: repeat-x;
-  background-position: left center;
-  background-size: auto 100%;
+  height: 56px;
+  border-block: 2px solid rgba(241, 236, 224, 0.3);
+  overflow: hidden;
+}
+#lore > p:first-child > svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Reveal: the row of swirls grows outward from the centerpoint until
+   it spans the full width, playing once as the band scrolls into
+   view. Anonymous view() is safe here (unlike the panel/aside cases
+   elsewhere) since this element has no overflow:hidden ancestor of
+   its own sitting between it and the page scroller. */
+@supports (animation-timeline: view()) {
+  #lore > p:first-child > svg {
+    clip-path: inset(0 50% 0 50%);
+    animation-name: lore-band-reveal;
+    animation-duration: 1s;
+    animation-timing-function: ease-out;
+    animation-timeline: view();
+    animation-range: entry 0% entry 65%;
+    animation-fill-mode: both;
+  }
+}
+@keyframes lore-band-reveal {
+  from { clip-path: inset(0 50% 0 50%); }
+  to { clip-path: inset(0 0% 0 0%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #lore > p:first-child > svg { animation: none !important; clip-path: none !important; }
 }
 
 /* #lore lays out its children on a 5-track grid: a full-bleed track for the
