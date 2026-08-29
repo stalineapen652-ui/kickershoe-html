@@ -130,8 +130,20 @@ body > header::before {
   z-index: -1;
   transition: width 0.35s ease, height 0.35s ease;
 }
-body > header[data-scrolled] { padding-top: 8px; padding-bottom: 8px; }
-body > header[data-scrolled]::before { width: 320px; height: 90px; }
+/* Once scrolled past the hero, headings from every section pass under
+   this fixed header sooner or later -- a transparent bar plus a
+   vignette sized only for the logo isn't enough to keep that text
+   from visually colliding with it (confirmed: "THE SHOE" running
+   straight through the logo on mobile). A real backdrop only in the
+   scrolled state fixes that without bringing back the bar over the
+   hero itself, which is the one place it was asked to stay bare. */
+body > header[data-scrolled] {
+  padding-top: 8px; padding-bottom: 8px;
+  background: rgba(10, 15, 10, 0.9);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(241, 236, 224, 0.15);
+}
+body > header[data-scrolled]::before { width: 320px; height: 90px; opacity: 0; }
 
 body > header > a { display: inline-flex; pointer-events: auto; }
 body > header > a > img {
@@ -163,6 +175,15 @@ body > nav[aria-label="Primary"] {
   z-index: 55;
   display: flex; flex-direction: column; gap: 34px;
 }
+body > nav[aria-label="Primary"]::before {
+  content: '';
+  position: absolute; left: 50%; top: 50%;
+  width: 110px; height: 320px;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(ellipse at center, rgba(5, 5, 5, 0.8) 0%, rgba(5, 5, 5, 0.45) 50%, transparent 78%);
+  z-index: -1;
+  pointer-events: none;
+}
 body > nav[aria-label="Primary"] > a {
   position: relative;
   display: flex; align-items: center; justify-content: center;
@@ -190,6 +211,7 @@ body > nav[aria-label="Primary"] > a:hover > span { opacity: 1; transform: trans
 
 @media (max-width: 720px) {
   body > nav[aria-label="Primary"] { right: 10px; gap: 26px; }
+  body > nav[aria-label="Primary"]::before { width: 80px; height: 240px; }
   body > nav[aria-label="Primary"] > a > img { width: 28px; }
   body > nav[aria-label="Primary"] > a > span { display: none; }
 }
@@ -445,21 +467,12 @@ body > nav[aria-label="Primary"] > a:hover > span { opacity: 1; transform: trans
   z-index: 2;
 }
 
-/* Diagonal panel cut — the trailing edge of each panel (image, scrim
-   and badge together, not just the divider line) is shorn on the same
-   lean as the divider itself, so the seam reads as one continuous cut
-   rather than a line floating over a rectangular photo. */
-#origin > article li:not(:last-child) {
-  clip-path: polygon(0 0, 100% 0, calc(100% - 90px) 100%, 0 100%);
-}
 #origin > article li:not(:last-child)::after {
   content: '';
   position: absolute; top: 0; right: -2px; width: 5px; height: 100%;
   z-index: 3;
   background: var(--bone);
   filter: url(#hero-ink-wobble);
-  transform: skewX(-30deg);
-  transform-origin: center;
 }
 
 #origin > article li img {
@@ -564,15 +577,23 @@ body > nav[aria-label="Primary"] > a:hover > span { opacity: 1; transform: trans
 
 @media (max-width: 720px) {
   #origin > article > ul { flex-direction: column; }
-  #origin > article li { flex: 1 1 0%; transition: flex-grow 0.5s cubic-bezier(0.2, 0.8, 0.2, 1); clip-path: none; }
-  #origin > article > ul:has(li[aria-expanded="true"]) li:not([aria-expanded="true"]) { flex: 0.4 1 0%; }
-  #origin > article li[aria-expanded="true"] { flex: 4 1 0%; }
+  /* Fixed pixel heights instead of proportional flex-grow: a 4-way
+     equal split of the hero's height left too little room for a
+     caption, causing it to run into the image above/below it. */
+  #origin > article li { flex: none; height: 112px; transition: height 0.4s ease; }
+  #origin > article li[aria-expanded="true"] { height: 340px; }
   #origin > article li:not(:last-child)::after {
     top: auto; bottom: -2px; right: 0; width: 100%; height: 5px;
-    transform: none;
   }
-  #origin > article li footer h3 { writing-mode: horizontal-tb; font-size: 15px; }
-  #origin > article li[aria-expanded="true"] footer h3 { font-size: 22px; }
+  #origin > article li footer {
+    padding: 10px 12px;
+    gap: 6px;
+    background: linear-gradient(to top, rgba(5, 5, 5, 0.94) 0%, rgba(5, 5, 5, 0.75) 65%, transparent 100%);
+  }
+  #origin > article li footer h3 { writing-mode: horizontal-tb; font-size: 13px; line-height: 1.2; }
+  #origin > article li[aria-expanded="true"] footer h3 { font-size: 19px; }
+  #origin > article li footer p { font-size: 11px; line-height: 1.4; max-width: none; }
+  #origin > article li footer a { font-size: 12px; padding: 6px 10px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -794,18 +815,13 @@ body > nav[aria-label="Primary"] > a:hover > span { opacity: 1; transform: trans
 #lore { border-top: 4px solid var(--bone); }
 
 #lore > p:first-child {
-  border-block: 2px solid var(--primary);
-  background: rgba(57, 255, 20, 0.1);
-  padding: 10px 0;
-  overflow: hidden;
-  white-space: nowrap;
-  font-size: 12px; text-transform: uppercase; letter-spacing: 0.3em;
-  color: var(--primary);
-  animation: ticker 40s linear infinite;
-}
-@keyframes ticker {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  height: 90px;
+  border-block: 2px solid var(--bone);
+  background-color: var(--bone);
+  background-image: url('assets/patterns/spiral-band.svg');
+  background-repeat: repeat-x;
+  background-position: left center;
+  background-size: auto 100%;
 }
 
 /* #lore lays out its children on a 5-track grid: a full-bleed track for the
