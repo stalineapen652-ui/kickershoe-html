@@ -63,6 +63,17 @@
     <a href="about.html#community"><img src="assets/icons/SVG/connect.svg" alt="Connect" /><span aria-hidden="true">Connect</span></a>
   </nav>
 
+  <script>
+    (function () {
+      var header = document.querySelector('body > header');
+      function onScroll() {
+        header.toggleAttribute('data-scrolled', window.scrollY > 60);
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    })();
+  </script>
+
   <main>
 
     <!-- ============ HERO: COMIC-GRID MOSAIC ============ -->

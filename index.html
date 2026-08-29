@@ -48,6 +48,17 @@
     <a href="about.html#community"><img src="assets/icons/SVG/connect.svg" alt="Connect" /><span aria-hidden="true">Connect</span></a>
   </nav>
 
+  <script>
+    (function () {
+      var header = document.querySelector('body > header');
+      function onScroll() {
+        header.toggleAttribute('data-scrolled', window.scrollY > 60);
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    })();
+  </script>
+
   <main>
 
     <!-- ============ HERO ============ -->
@@ -86,8 +97,6 @@
             <feDisplacementMap in="SourceGraphic" in2="n" scale="10" xChannelSelector="R" yChannelSelector="G" />
           </filter>
         </svg>
-
-        <p><svg class="icon-mark" viewBox="0 0 64 64" aria-hidden="true"><path d="M32 18 L36 28 L47 28 L38 35 L41 46 L32 39 L23 46 L26 35 L17 28 L28 28 Z"/></svg>// THE UNIVERSE</p>
 
         <ul>
           <li aria-expanded="false">
