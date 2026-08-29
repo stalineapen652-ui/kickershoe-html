@@ -550,30 +550,23 @@ body > nav[aria-label="Primary"] > a:hover > span { opacity: 1; transform: trans
   padding: 6px 12px;
 }
 
-/* ============ Hero Slider — Dots ============ */
+/* ============ Hero Slider — Dashes ============ */
 #origin > nav {
-  position: absolute; bottom: 20px; left: 50%;
+  position: absolute; bottom: 24px; left: 50%;
   transform: translateX(-50%);
   z-index: 5;
-  display: flex; gap: 10px;
+  display: flex; align-items: center; gap: 10px;
 }
 #origin > nav button {
-  display: flex; align-items: center; gap: 8px;
-  border: 2px solid rgba(241, 236, 224, 0.35);
-  background: rgba(5, 5, 5, 0.6);
-  color: rgba(241, 236, 224, 0.6);
-  padding: 6px 12px;
-  font-family: var(--font-mono);
-  font-size: 9px; text-transform: uppercase; letter-spacing: 0.2em;
+  width: 28px; height: 3px;
+  border: none;
+  background: rgba(241, 236, 224, 0.35);
+  padding: 0;
   cursor: pointer;
-  transition: border-color 0.2s, color 0.2s;
+  transition: background 0.25s, width 0.25s;
 }
-#origin > nav button > span:first-child {
-  display: inline-block; width: 6px; height: 6px; border-radius: 50%;
-  background: rgba(241, 236, 224, 0.4);
-}
-#origin > nav button[aria-current="true"] { border-color: var(--primary); color: var(--bone); }
-#origin > nav button[aria-current="true"] > span:first-child { background: var(--primary); }
+#origin > nav button:hover { background: rgba(241, 236, 224, 0.6); }
+#origin > nav button[aria-current="true"] { width: 44px; background: var(--primary); }
 
 @media (max-width: 720px) {
   #origin > article > ul { flex-direction: column; }
