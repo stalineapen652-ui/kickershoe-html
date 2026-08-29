@@ -34,6 +34,66 @@
 </head>
 <body>
 
+  <!-- ============ LOADING SCREEN ============ -->
+  <aside aria-label="Loading" role="status">
+    <svg viewBox="0 0 300 300" aria-hidden="true">
+      <defs>
+        <filter id="loader-wobble">
+          <feTurbulence type="fractalNoise" baseFrequency="0.012 0.03" numOctaves="3" seed="7" result="n" />
+          <feDisplacementMap in="SourceGraphic" in2="n" scale="9" xChannelSelector="R" yChannelSelector="G" />
+        </filter>
+      </defs>
+      <path id="loader-spiral" />
+    </svg>
+    <img src="assets/logo/kickershoe-logo.png" alt="" aria-hidden="true" />
+  </aside>
+
+  <script>
+    (function () {
+      var loader = document.querySelector('body > aside[aria-label="Loading"]');
+      var KEY = 'kickershoe-loaded';
+      var already;
+      try { already = sessionStorage.getItem(KEY); } catch (e) {}
+
+      if (already) {
+        loader.hidden = true;
+        return;
+      }
+
+      var path = loader.querySelector('#loader-spiral');
+      function buildSpiralPath(turns, startR, endR, cx, cy, steps) {
+        var d = '';
+        for (var i = 0; i <= steps; i++) {
+          var t = i / steps;
+          var angle = t * turns * Math.PI * 2;
+          var r = startR + (endR - startR) * t;
+          var x = cx + r * Math.cos(angle);
+          var y = cy + r * Math.sin(angle);
+          d += (i === 0 ? 'M' : 'L') + x.toFixed(2) + ',' + y.toFixed(2) + ' ';
+        }
+        return d;
+      }
+      path.setAttribute('d', buildSpiralPath(4.5, 6, 130, 150, 150, 300));
+      var len = path.getTotalLength();
+      path.style.strokeDasharray = (len * 0.22) + ' ' + (len * 0.78);
+      path.animate(
+        [{ strokeDashoffset: 0 }, { strokeDashoffset: -len }],
+        { duration: 3200, iterations: Infinity, easing: 'linear' }
+      );
+
+      var minTime = new Promise(function (resolve) { setTimeout(resolve, 1500); });
+      var loaded = document.readyState === 'complete'
+        ? Promise.resolve()
+        : new Promise(function (resolve) { window.addEventListener('load', resolve, { once: true }); });
+
+      Promise.all([minTime, loaded]).then(function () {
+        try { sessionStorage.setItem(KEY, '1'); } catch (e) {}
+        loader.setAttribute('data-closing', '');
+        setTimeout(function () { loader.hidden = true; }, 650);
+      });
+    })();
+  </script>
+
   <!-- ============ HEADER ============ -->
   <header>
     <a href="#origin" aria-label="KICKERSHOE — home">

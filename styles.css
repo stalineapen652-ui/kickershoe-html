@@ -109,6 +109,38 @@ button:hover .icon-mark .dot {
   }
 }
 
+/* ============ Loading Screen (index.html only) ============
+   A hand-wobbled spiral (same displacement-filter technique as the
+   hero divider) with a lit segment chasing along it, shown once per
+   browser session on first visit to the homepage. Uses opacity for
+   the exit fade rather than the [hidden] attribute directly, since
+   [hidden] is display:none !important sitewide and can't transition. */
+body > aside[aria-label="Loading"] {
+  position: fixed; inset: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--bg);
+  opacity: 1;
+  transition: opacity 0.6s ease;
+}
+body > aside[aria-label="Loading"][data-closing] { opacity: 0; }
+
+body > aside[aria-label="Loading"] svg {
+  width: min(60vw, 260px);
+  height: min(60vw, 260px);
+}
+body > aside[aria-label="Loading"] path {
+  fill: none;
+  stroke: var(--primary);
+  stroke-width: 7;
+  stroke-linecap: round;
+  filter: url(#loader-wobble);
+}
+body > aside[aria-label="Loading"] img {
+  position: absolute;
+  height: 34px; width: auto;
+  filter: drop-shadow(0 0 10px var(--bg)) drop-shadow(0 0 10px var(--bg));
+}
+
 /* ============ Header ============
    Logo only — no wordmark text, no nav links in the bar itself. A
    vignette sits behind the mark so it stays legible over any hero
