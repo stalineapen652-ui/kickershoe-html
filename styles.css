@@ -7,7 +7,7 @@
   --primary: #39ff14;
   --secondary: #ff8a14;
   --gold: #d4a23a;
-  --purple: #800080;
+  --purple: #dc00dc;
   --font-display: 'Anton', 'Impact', sans-serif;
   --font-mono: 'JetBrains Mono', 'Courier New', monospace;
 }
@@ -36,6 +36,37 @@ mark { background: none; color: var(--purple); }
 img { display: block; max-width: 100%; height: auto; }
 
 a { color: inherit; text-decoration: none; }
+
+/* ============ JS / Motion Toggle — global override ============
+   Driven by the footer button ("JS ON"/"JS OFF"): sets/removes
+   data-motion="off" on <html>. A blanket kill of every animation and
+   transition is safe on its own for transitions (no "resting state" to
+   strand) and for most @keyframes — except the few components below whose
+   pre-animation state (opacity/transform/clip-path) is set directly on the
+   element rather than produced by the keyframe's own 0%/from state; those
+   need an explicit resolved-visible override or they'd freeze invisible
+   instead of frozen-in-place. Additive to (not a replacement for) the
+   prefers-reduced-motion blocks elsewhere in this file. */
+html[data-motion="off"] { scroll-behavior: auto !important; }
+html[data-motion="off"] *,
+html[data-motion="off"] *::before,
+html[data-motion="off"] *::after {
+  animation: none !important;
+  transition: none !important;
+}
+html[data-motion="off"] #shoe aside,
+html[data-motion="off"] #lore > p:first-child > svg,
+html[data-motion="off"] #about li img,
+html[data-motion="off"] #about h1,
+html[data-motion="off"] #about > header > p:nth-of-type(2),
+html[data-motion="off"] #about > header > nav,
+html[data-motion="off"] main:has(> a:first-child) > section:nth-of-type(2) li img,
+html[data-motion="off"] main:has(> a:first-child) > section:nth-of-type(2) li figure,
+html[data-motion="off"] main:has(> a:first-child) > section:nth-of-type(2) li figure p span {
+  opacity: 1 !important;
+  transform: none !important;
+  clip-path: none !important;
+}
 
 /* ============ Shared: section-intro label (was .eyebrow-sm) ============ */
 main :is(section, article) > header > p:first-child,
@@ -601,11 +632,16 @@ body > nav[aria-label="Primary"] > a:hover > span { opacity: 1; transform: trans
 #origin > nav button[aria-current="true"] { width: 44px; background: var(--primary); }
 
 @media (max-width: 720px) {
-  #origin > article > ul { flex-direction: column; }
-  /* Fixed pixel heights instead of proportional flex-grow: a 4-way
-     equal split of the hero's height left too little room for a
-     caption, causing it to run into the image above/below it. */
-  #origin > article li { flex: none; height: 112px; transition: height 0.4s ease; }
+  /* padding-top clears the fixed header's logo/vignette, which otherwise
+     sits directly on top of the first panel's caption. */
+  #origin > article > ul { flex-direction: column; padding-top: 100px; }
+  /* A 4-way equal split (25%) fills the hero with no leftover gap below
+     the stack; the 112px floor is a fallback for a caption running into
+     the image above/below it on very short viewports. Once a panel is
+     expanded, siblings drop back to that same fixed floor so the
+     expanded panel's fixed height always fits without overflowing. */
+  #origin > article li { flex: none; height: max(112px, 25%); transition: height 0.4s ease; }
+  #origin > article > ul:has(li[aria-expanded="true"]) li:not([aria-expanded="true"]) { height: 112px; }
   #origin > article li[aria-expanded="true"] { height: 340px; }
   #origin > article li:not(:last-child)::after {
     top: auto; bottom: -2px; right: 0; width: 100%; height: 5px;
@@ -893,7 +929,7 @@ body > nav[aria-label="Primary"] > a:hover > span { opacity: 1; transform: trans
   margin-top: 8px;
 }
 #lore > aside { grid-column: 2; margin-top: 32px; margin-bottom: 100px; }
-#lore > dl { grid-column: 4; margin-top: 32px; margin-bottom: 100px; }
+#lore > div { grid-column: 4; margin-top: 32px; margin-bottom: 100px; }
 
 @media (max-width: 720px) {
   #lore {
@@ -901,7 +937,7 @@ body > nav[aria-label="Primary"] > a:hover > span { opacity: 1; transform: trans
   }
   #lore > header { grid-column: 2; }
   #lore > aside { grid-column: 2; margin-bottom: 32px; }
-  #lore > dl { grid-column: 2; margin-top: 0; }
+  #lore > div { grid-column: 2; margin-top: 0; }
 }
 
 #lore aside {
@@ -917,9 +953,9 @@ body > nav[aria-label="Primary"] > a:hover > span { opacity: 1; transform: trans
   font-size: 10px; text-transform: uppercase; letter-spacing: 0.3em;
   color: var(--primary);
 }
-#lore aside > p:last-child { margin-top: 16px; color: rgba(241, 236, 224, 0.4); }
+#lore aside > p:last-child { margin-top: 16px; color: rgba(241, 236, 224, 0.55); }
 
-#lore dl { display: flex; flex-direction: column; gap: 12px; }
+#lore > div { display: flex; flex-direction: column; gap: 12px; }
 
 details {
   border: 2px solid rgba(241, 236, 224, 0.4);
@@ -1068,8 +1104,8 @@ body > footer > nav a:hover { color: var(--primary); }
   body > footer > nav { flex-wrap: wrap; gap: 14px 20px; }
 }
 
-/* ============ Sound Toggle ============ */
-body > button[aria-label="Toggle ambient sound"] {
+/* ============ JS / Motion Toggle Button ============ */
+body > button[aria-label="Toggle animations"] {
   position: fixed; bottom: 24px; right: 24px; z-index: 60;
   display: flex; align-items: center; gap: 8px;
   border: 2px solid var(--bone);
@@ -1081,13 +1117,13 @@ body > button[aria-label="Toggle ambient sound"] {
   cursor: pointer;
   transition: background 0.2s, color 0.2s;
 }
-body > button[aria-label="Toggle ambient sound"]:hover { background: var(--primary); color: var(--ink); }
-body > button[aria-label="Toggle ambient sound"] > span:first-child {
+body > button[aria-label="Toggle animations"]:hover { background: var(--primary); color: var(--ink); }
+body > button[aria-label="Toggle animations"] > span:first-child {
   display: inline-block; width: 8px; height: 8px;
   background: rgba(241, 236, 224, 0.4);
   border-radius: 50%;
 }
-body > button[aria-label="Toggle ambient sound"][aria-pressed="true"] > span:first-child {
+body > button[aria-label="Toggle animations"][aria-pressed="true"] > span:first-child {
   background: var(--primary); animation: pulse 1.5s infinite;
 }
 

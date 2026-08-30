@@ -340,7 +340,7 @@
         <p>— EDITOR, KICKERSHOE</p>
       </aside>
 
-      <dl>
+      <div>
         <details open>
           <summary><span>ENTRY 01</span><span>WHO IS THE MANTIS?</span><span>+</span></summary>
           <p>Born in the wet grass east of the river. Smaller than his peers. Quieter. He watched football from behind a leaf for nine seasons before he ever touched a ball. He is, by all accounts, still alive.</p>
@@ -357,7 +357,7 @@
           <summary><span>ENTRY 04</span><span>THE GOLD STITCHING</span><span>+</span></summary>
           <p>Filament is real. We tested it. We don't know where he gets it. He won't say.</p>
         </details>
-      </dl>
+      </div>
     </section>
 
     <!-- ============ JOIN ============ -->
@@ -394,9 +394,9 @@
     <p><svg class="icon-mark icon-mark--sm" viewBox="0 0 64 64" aria-hidden="true"><path d="M32 18 L36 28 L47 28 L38 35 L41 46 L32 39 L23 46 L26 35 L17 28 L28 28 Z"/></svg><span>ISSN 0042-1996</span> <mark>EST. 2026</mark></p>
   </footer>
 
-  <button aria-label="Toggle ambient sound" aria-pressed="false">
+  <button aria-label="Toggle animations" aria-pressed="true">
     <span></span>
-    <span>SFX OFF</span>
+    <span>JS ON</span>
   </button>
 
   <aside aria-label="Cookie notice" hidden>
@@ -411,10 +411,17 @@
   </aside>
 
   <script>
-    document.querySelector('body > button[aria-label="Toggle ambient sound"]').addEventListener('click', function () {
+    document.querySelector('body > button[aria-label="Toggle animations"]').addEventListener('click', function () {
       var pressed = this.getAttribute('aria-pressed') === 'true';
-      this.setAttribute('aria-pressed', String(!pressed));
-      this.querySelector('span:last-child').textContent = !pressed ? 'SFX ON' : 'SFX OFF';
+      var enabled = !pressed;
+      this.setAttribute('aria-pressed', String(enabled));
+      this.querySelector('span:last-child').textContent = enabled ? 'JS ON' : 'JS OFF';
+      if (enabled) {
+        document.documentElement.removeAttribute('data-motion');
+      } else {
+        document.documentElement.setAttribute('data-motion', 'off');
+      }
+      document.dispatchEvent(new CustomEvent('kickershoe:motionchange', { detail: { enabled: enabled } }));
     });
 
     document.querySelector('#join form').addEventListener('submit', function (event) {
@@ -435,7 +442,8 @@
       var dots = origin.querySelectorAll(':scope > nav button');
       var issuesSection = document.querySelector('#issues');
       var current = 0;
-      var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var osReduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      function motionOff() { return osReduceMotion || document.documentElement.getAttribute('data-motion') === 'off'; }
       var autoplayTimer = null;
 
       function showSlide(index) {
@@ -450,7 +458,7 @@
       }
 
       function startAutoplay() {
-        if (reduceMotion) return;
+        if (motionOff()) return;
         stopAutoplay();
         autoplayTimer = setInterval(function () {
           showSlide((current + 1) % slides.length);
@@ -478,6 +486,7 @@
       ];
       var canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
       var panels = origin.querySelectorAll(':scope > article > ul > li');
+      var stopCycles = [];
 
       panels.forEach(function (li, i) {
         var img = li.querySelector('img');
@@ -486,7 +495,7 @@
         var lastIndex = 0;
 
         function startCycle() {
-          if (reduceMotion || imgs.length < 2) return;
+          if (motionOff() || imgs.length < 2) return;
           cycleTimer = setInterval(function () {
             var next = lastIndex;
             while (next === lastIndex) next = Math.floor(Math.random() * imgs.length);
@@ -505,6 +514,7 @@
           img.src = imgs[0];
           img.style.opacity = 1;
         }
+        stopCycles.push(stopCycle);
 
         function expand() {
           panels.forEach(function (other) { other.setAttribute('aria-expanded', 'false'); });
@@ -529,6 +539,15 @@
               expand();
             }
           });
+        }
+      });
+
+      document.addEventListener('kickershoe:motionchange', function (event) {
+        if (event.detail.enabled) {
+          startAutoplay();
+        } else {
+          stopAutoplay();
+          stopCycles.forEach(function (fn) { fn(); });
         }
       });
     })();

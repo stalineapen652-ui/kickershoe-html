@@ -224,7 +224,7 @@
         <p>— EDITOR, KICKERSHOE</p>
       </aside>
 
-      <dl>
+      <div>
         <details open>
           <summary><span>ENTRY 01</span><span>WHO IS THE GOAT?</span><span>+</span></summary>
           <p>Small horns for his weight class, big enough grudge to fill a stadium. Fought in gyms with no name on the door. Nobody expected him still standing by round three — let alone round twelve.</p>
@@ -241,7 +241,7 @@
           <summary><span>ENTRY 04</span><span>THE F50 NAME</span><span>+</span></summary>
           <p>No record of what it stands for. Some say it's a locker number. Some say it's a round count. He's never confirmed either.</p>
         </details>
-      </dl>
+      </div>
     </section>
 
   </main>
@@ -256,9 +256,9 @@
     <p><svg class="icon-mark icon-mark--sm" viewBox="0 0 64 64" aria-hidden="true"><path d="M32 18 L36 28 L47 28 L38 35 L41 46 L32 39 L23 46 L26 35 L17 28 L28 28 Z"/></svg><span>ISSN 0042-1996</span> <mark>EST. 2026</mark></p>
   </footer>
 
-  <button aria-label="Toggle ambient sound" aria-pressed="false">
+  <button aria-label="Toggle animations" aria-pressed="true">
     <span></span>
-    <span>SFX OFF</span>
+    <span>JS ON</span>
   </button>
 
   <aside aria-label="Cookie notice" hidden>
@@ -273,10 +273,17 @@
   </aside>
 
   <script>
-    document.querySelector('body > button[aria-label="Toggle ambient sound"]').addEventListener('click', function () {
+    document.querySelector('body > button[aria-label="Toggle animations"]').addEventListener('click', function () {
       var pressed = this.getAttribute('aria-pressed') === 'true';
-      this.setAttribute('aria-pressed', String(!pressed));
-      this.querySelector('span:last-child').textContent = !pressed ? 'SFX ON' : 'SFX OFF';
+      var enabled = !pressed;
+      this.setAttribute('aria-pressed', String(enabled));
+      this.querySelector('span:last-child').textContent = enabled ? 'JS ON' : 'JS OFF';
+      if (enabled) {
+        document.documentElement.removeAttribute('data-motion');
+      } else {
+        document.documentElement.setAttribute('data-motion', 'off');
+      }
+      document.dispatchEvent(new CustomEvent('kickershoe:motionchange', { detail: { enabled: enabled } }));
     });
   </script>
 
