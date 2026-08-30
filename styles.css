@@ -67,6 +67,7 @@ html[data-motion="off"] main:has(> a:first-child) > section:nth-of-type(2) li fi
   transform: none !important;
   clip-path: none !important;
 }
+html[data-motion="off"] #brand-mark .brand-connector span { height: 60px !important; }
 
 /* ============ Shared: section-intro label (was .eyebrow-sm) ============ */
 main :is(section, article) > header > p:first-child,
@@ -234,14 +235,14 @@ body > header[data-scrolled] > a > img { height: 38px; }
    the right edge, present on every page. Three stops only (Origin,
    About, Connect) per the brand's own icon set in assets/icons/SVG. */
 body > nav[aria-label="Primary"] {
-  position: fixed; right: 20px; top: 50%; transform: translateY(-50%);
+  position: fixed; right: 22px; top: 50%; transform: translateY(-50%);
   z-index: 55;
-  display: flex; flex-direction: column; gap: 34px;
+  display: flex; flex-direction: column; gap: 38px;
 }
 body > nav[aria-label="Primary"]::before {
   content: '';
   position: absolute; left: 50%; top: 50%;
-  width: 110px; height: 320px;
+  width: 120px; height: 340px;
   transform: translate(-50%, -50%);
   background: radial-gradient(ellipse at center, rgba(5, 5, 5, 0.8) 0%, rgba(5, 5, 5, 0.45) 50%, transparent 78%);
   z-index: -1;
@@ -252,7 +253,7 @@ body > nav[aria-label="Primary"] > a {
   display: flex; align-items: center; justify-content: center;
 }
 body > nav[aria-label="Primary"] > a > img {
-  width: 38px; height: auto;
+  width: 44px; height: auto;
   filter: drop-shadow(0 0 6px rgba(128, 0, 128, 0.55));
   transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.3s;
 }
@@ -261,16 +262,16 @@ body > nav[aria-label="Primary"] > a:hover > img {
   filter: drop-shadow(0 0 14px rgba(57, 255, 20, 0.8));
 }
 body > nav[aria-label="Primary"] > a > span {
-  position: absolute; right: 100%; margin-right: 12px;
+  position: absolute; top: 100%; left: 50%; margin-top: 10px;
   font-family: var(--font-mono);
   font-size: 9px; text-transform: uppercase; letter-spacing: 0.15em;
   color: var(--bone);
   white-space: nowrap;
-  opacity: 0; transform: translateX(6px);
+  opacity: 0; transform: translate(-50%, -4px);
   transition: opacity 0.2s, transform 0.2s;
   pointer-events: none;
 }
-body > nav[aria-label="Primary"] > a:hover > span { opacity: 1; transform: translateX(0); }
+body > nav[aria-label="Primary"] > a:hover > span { opacity: 1; transform: translate(-50%, 0); }
 
 @media (max-width: 720px) {
   body > nav[aria-label="Primary"] { right: 10px; gap: 26px; }
@@ -543,15 +544,6 @@ body > nav[aria-label="Primary"] > a:hover > span { opacity: 1; transform: trans
   width: 100%; height: 100%;
   object-fit: cover;
   transition: opacity 0.3s ease;
-}
-
-#origin > article li data {
-  position: absolute; top: 16px; left: 12px;
-  z-index: 4;
-  background: var(--primary); color: var(--ink);
-  padding: 4px 8px;
-  font-size: 9px; font-weight: 700;
-  text-transform: uppercase; letter-spacing: 0.2em;
 }
 
 #origin > article li footer {
@@ -1179,29 +1171,30 @@ main:has(> a:first-child) > section:nth-of-type(2) {
 main:has(> a:first-child) > section:nth-of-type(2) ul {
   list-style: none;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(10, 1fr);
+  /* A shared row height (not a per-panel aspect-ratio) so two unequal-width
+     panels in the same row still line up — checked every issue's source
+     images first: native ratios range from 1.4 to nearly 3:1, too wide a
+     spread for one fixed aspect-ratio to crop predictably. object-fit:cover
+     against a fixed height handles that variance far more gracefully. */
+  grid-auto-rows: clamp(220px, 28vw, 440px);
   gap: 24px;
 }
 main:has(> a:first-child) > section:nth-of-type(2) li {
   position: relative;
-  aspect-ratio: 1280 / 890;
   overflow: hidden;
   box-shadow: 8px 8px 0 0 var(--ink), 8px 8px 0 4px var(--bone);
   background: var(--ink);
-  /* Named view-timeline anchored on li itself. Its descendants (img, figure,
-     word spans) reference this by name instead of using animation-timeline:
-     view() directly — an anonymous view() timeline resolves against the
-     nearest scroll container, and li's own overflow:hidden makes li that
-     container, so a descendant's view() tracks li's tiny internal scrollport
-     instead of the page. That left the reveal animation stuck at its 0%
-     keyframe (opacity: 0) forever — the "invisible caption" bug. */
-  view-timeline-name: --frame-reveal;
-  view-timeline-axis: block;
 }
 main:has(> a:first-child) > section:nth-of-type(2) li img {
   width: 100%; height: 100%; object-fit: cover;
   opacity: 0;
   transform: scale(1.08);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+main:has(> a:first-child) > section:nth-of-type(2) li.is-revealed img {
+  opacity: 1;
+  transform: scale(1);
 }
 
 main:has(> a:first-child) > section:nth-of-type(2) li > span:first-child {
@@ -1215,18 +1208,26 @@ main:has(> a:first-child) > section:nth-of-type(2) li > span:first-child {
   z-index: 2;
 }
 
-/* Diagonal panel cuts — each frame in a 5-panel module (2-up / wide / 2-up)
-   gets one corner sheared off for a hand-cut comic-page feel. */
-main:has(> a:first-child) > section:nth-of-type(2) li:nth-of-type(5n+3) { grid-column: 1 / -1; }
-main:has(> a:first-child) > section:nth-of-type(2) li:nth-of-type(5n+1) { clip-path: polygon(0 0, 100% 0, 100% 0%, 75% 100%, 0 100%); }
-main:has(> a:first-child) > section:nth-of-type(2) li:nth-of-type(5n+2) { clip-path: polygon(20% 0, 100% 0, 100% 100%, 20% 100%, 0 80%); }
-main:has(> a:first-child) > section:nth-of-type(2) li:nth-of-type(5n+4) { clip-path: polygon(0 0, 55% 0, 100% 20%, 100% 100%, 0 100%); }
-main:has(> a:first-child) > section:nth-of-type(2) li:nth-of-type(5n) {
-  clip-path: polygon(50% 0, 100% 0, 100% 100%, 0 100%, 0 20%);
+/* Always two panels per row; the wide/narrow split alternates sides every
+   row (6/4 tracks of the 10-track grid above) so emphasis zig-zags down
+   the page instead of a flat 50/50 repeat. Every li matches exactly one
+   of the four nth-of-type rules below (cycle repeats every 2 rows). */
+main:has(> a:first-child) > section:nth-of-type(2) li:nth-of-type(4n+1) { grid-column: span 6; }
+main:has(> a:first-child) > section:nth-of-type(2) li:nth-of-type(4n+2) { grid-column: span 4; }
+main:has(> a:first-child) > section:nth-of-type(2) li:nth-of-type(4n+3) { grid-column: span 4; }
+main:has(> a:first-child) > section:nth-of-type(2) li:nth-of-type(4n)   { grid-column: span 6; }
+
+/* Hand-cut corner notch, shallow enough that a full-width caption box
+   still clears it — left-column panels (4n+1, 4n+3) notch the bottom-right
+   corner, right-column panels (4n+2, 4n) notch the bottom-left, regardless
+   of which is the wide or narrow one that row. */
+main:has(> a:first-child) > section:nth-of-type(2) li:nth-of-type(4n+1),
+main:has(> a:first-child) > section:nth-of-type(2) li:nth-of-type(4n+3) {
+  clip-path: polygon(0 0, 100% 0, 100% 88%, 90% 100%, 0 100%);
 }
-main:has(> a:first-child) > section:nth-of-type(2) li:nth-of-type(5n) > span:first-child { left: auto; right: 12px; }
-main:has(> a:first-child) > section:nth-of-type(2) li:nth-of-type(5n+3) {
-  clip-path: polygon(2% 0, 100% 0, 100% 96%, 98% 100%, 0 100%, 0 4%);
+main:has(> a:first-child) > section:nth-of-type(2) li:nth-of-type(4n+2),
+main:has(> a:first-child) > section:nth-of-type(2) li:nth-of-type(4n) {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 10% 100%, 0 88%);
 }
 
 main:has(> a:first-child) > section:nth-of-type(2) li figure {
@@ -1239,89 +1240,104 @@ main:has(> a:first-child) > section:nth-of-type(2) li figure {
   z-index: 3;
   opacity: 0;
   transform: translateY(16px);
+  transition: opacity 0.5s ease 0.3s, transform 0.5s ease 0.3s;
 }
-main:has(> a:first-child) > section:nth-of-type(2) li figcaption {
-  display: block;
-  font-size: 9px; text-transform: uppercase; letter-spacing: 0.2em;
-  color: rgba(5, 5, 5, 0.7);
-  margin-bottom: 4px;
+main:has(> a:first-child) > section:nth-of-type(2) li.is-revealed figure {
+  opacity: 1;
+  transform: translateY(0);
 }
 main:has(> a:first-child) > section:nth-of-type(2) li figure p { font-size: 12px; line-height: 1.35; }
 main:has(> a:first-child) > section:nth-of-type(2) li figure p span {
   display: inline-block;
   opacity: 0;
   transform: translateY(8px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  /* --i (word index, set by the caption-splitting script) staggers each
+     word's delay so they fade up in reading order, left to right. */
+  transition-delay: calc(0.5s + var(--i, 0) * 0.05s);
 }
-main:has(> a:first-child) > section:nth-of-type(2) li:nth-of-type(5n+1) figure { right: auto; width: 62%; }
-main:has(> a:first-child) > section:nth-of-type(2) li:nth-of-type(5n+2) figure { left: auto; width: 62%; }
-
-/* Scroll reveal: image fades in, then the caption, then each word in turn.
-   Driven entirely by CSS scroll-timeline — no IntersectionObserver / JS
-   class toggling needed. Falls back to fully-visible content (no animation)
-   in browsers without support, so the page still reads correctly everywhere. */
-@supports (animation-timeline: view()) {
-  main:has(> a:first-child) > section:nth-of-type(2) li img,
-  main:has(> a:first-child) > section:nth-of-type(2) li figure,
-  main:has(> a:first-child) > section:nth-of-type(2) li figure p span {
-    animation-timeline: --frame-reveal;
-    animation-range: entry 0% cover 35%;
-    animation-fill-mode: both;
-  }
-
-  main:has(> a:first-child) > section:nth-of-type(2) li img { animation-name: reveal-image; animation-duration: 0.7s; }
-  main:has(> a:first-child) > section:nth-of-type(2) li figure { animation-name: reveal-caption; animation-duration: 0.5s; animation-delay: 0.15s; }
-  main:has(> a:first-child) > section:nth-of-type(2) li figure p span {
-    animation-name: reveal-word;
-    animation-duration: 0.4s;
-    animation-delay: calc(0.3s + var(--i, 0) * 0.06s);
-  }
+main:has(> a:first-child) > section:nth-of-type(2) li.is-revealed figure p span {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-@supports not (animation-timeline: view()) {
-  main:has(> a:first-child) > section:nth-of-type(2) li img,
-  main:has(> a:first-child) > section:nth-of-type(2) li figure,
-  main:has(> a:first-child) > section:nth-of-type(2) li figure p span {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-@keyframes reveal-image {
-  from { opacity: 0; transform: scale(1.08); }
-  to { opacity: 1; transform: scale(1); }
-}
-@keyframes reveal-caption {
-  from { opacity: 0; transform: translateY(16px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-@keyframes reveal-word {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
+/* Reveal is driven by an IntersectionObserver toggling .is-revealed on each
+   li (see the inline script on this page) rather than CSS scroll-timeline —
+   scroll-driven animation-timeline: view() is Chromium-only today, which
+   left this reveal invisible (or permanently blank) in any other browser.
+   A plain class + transition works everywhere. */
 @media (prefers-reduced-motion: reduce) {
   main:has(> a:first-child) > section:nth-of-type(2) li img,
   main:has(> a:first-child) > section:nth-of-type(2) li figure,
   main:has(> a:first-child) > section:nth-of-type(2) li figure p span {
-    animation: none !important; opacity: 1 !important; transform: none !important;
+    transition: none !important; opacity: 1 !important; transform: none !important;
   }
 }
 
 @media (max-width: 720px) {
-  main:has(> a:first-child) > section:nth-of-type(2) ul { grid-template-columns: 1fr; }
-  main:has(> a:first-child) > section:nth-of-type(2) li:nth-of-type(5n+1),
-  main:has(> a:first-child) > section:nth-of-type(2) li:nth-of-type(5n+2),
-  main:has(> a:first-child) > section:nth-of-type(2) li:nth-of-type(5n+3),
-  main:has(> a:first-child) > section:nth-of-type(2) li:nth-of-type(5n+4),
-  main:has(> a:first-child) > section:nth-of-type(2) li:nth-of-type(5n) {
+  main:has(> a:first-child) > section:nth-of-type(2) ul { grid-template-columns: 1fr; grid-auto-rows: auto; }
+  main:has(> a:first-child) > section:nth-of-type(2) li:nth-of-type(4n+1),
+  main:has(> a:first-child) > section:nth-of-type(2) li:nth-of-type(4n+2),
+  main:has(> a:first-child) > section:nth-of-type(2) li:nth-of-type(4n+3),
+  main:has(> a:first-child) > section:nth-of-type(2) li:nth-of-type(4n) {
     grid-column: auto;
     clip-path: none;
   }
-  main:has(> a:first-child) > section:nth-of-type(2) li:nth-of-type(5n) > span:first-child { left: 12px; right: auto; }
-  main:has(> a:first-child) > section:nth-of-type(2) li:nth-of-type(5n+1) figure,
-  main:has(> a:first-child) > section:nth-of-type(2) li:nth-of-type(5n+2) figure {
-    left: 12px; right: 12px; width: auto;
+  /* The caption box is absolutely positioned over the bottom of the image on
+     desktop, which on a narrow screen covers too much of the artwork. Below
+     720px it drops into normal flow underneath the (now full-height, uncropped)
+     image instead of overlapping it. */
+  main:has(> a:first-child) > section:nth-of-type(2) li { height: auto; }
+  main:has(> a:first-child) > section:nth-of-type(2) li img {
+    display: block;
+    position: static;
+    height: auto;
   }
+  main:has(> a:first-child) > section:nth-of-type(2) li figure {
+    position: static;
+    width: auto;
+  }
+}
+
+/* ============ Issue Page: Brand Mark ============
+   A brand shoe image (placeholder until a per-issue asset is supplied),
+   framed in the site's signature border-and-offset-shadow treatment, sitting
+   between the comic and the lore section. Two short lines grow downward
+   from its left/right edges toward the lore heading below it, drawn in on
+   scroll via the same .is-revealed class pattern as the comic panels. */
+#brand-mark {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 32px 0;
+}
+#brand-mark figure {
+  width: min(360px, 60vw);
+  border: 4px solid var(--bone);
+  box-shadow: 8px 8px 0 0 var(--ink), 8px 8px 0 4px var(--bone);
+  background: var(--ink);
+}
+#brand-mark img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+#brand-mark .brand-connector {
+  display: flex;
+  justify-content: space-between;
+  width: min(360px, 60vw);
+}
+#brand-mark .brand-connector span {
+  width: 2px;
+  height: 0;
+  background: var(--primary);
+  transition: height 1s ease;
+}
+#brand-mark.is-revealed .brand-connector span {
+  height: 60px;
+}
+@media (prefers-reduced-motion: reduce) {
+  #brand-mark .brand-connector span { transition: none !important; height: 60px !important; }
 }
 
 /* ============ About Page ============ */
