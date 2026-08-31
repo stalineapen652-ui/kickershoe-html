@@ -45,9 +45,10 @@ kickershoe-html/
 ├── styles.css                # Shared stylesheet for all pages
 ├── sitemap.xml                # XML sitemap for search engines
 ├── robots.txt                  # Crawl rules + sitemap pointer
+├── favicon.ico                 # Browser-tab icon (16/32/48/64px)
 ├── assets/
 │   ├── images/               # Comic panels, product shots (WebP)
-│   ├── logo/                  # Brand logo (WebP + SVG)
+│   ├── logo/                  # Brand logo (WebP + SVG) + generated favicon PNGs
 │   ├── icons/                 # Nav icon SVGs
 │   └── js/
 │       ├── speed-insights-init.js   # Loads Speed Insights on each page
@@ -85,7 +86,7 @@ This writes everything into `dist/`. Serve that folder with any static file serv
 The site is hosted on **Vercel**, connected directly to this GitHub repository:
 
 - Every push to `main` triggers an automatic production deploy.
-- Vercel runs `npm run build` and serves `dist/` (see [`vercel.json`](vercel.json)) — no server-side rendering. Only the files `scripts/build.js` copies into `dist/` (HTML, minified CSS, `assets/`, `robots.txt`, `sitemap.xml`) are ever part of the live site; nothing else in this repo (docs, config, `README.md`) is publicly served.
+- Vercel runs `npm run build` and serves `dist/` (see [`vercel.json`](vercel.json)) — no server-side rendering. Only the files `scripts/build.js` copies into `dist/` (HTML, minified CSS, `assets/`, `robots.txt`, `sitemap.xml`, `favicon.ico`) are ever part of the live site; nothing else in this repo (docs, config, `README.md`) is publicly served.
 - Long-lived assets (`/assets/*`) are cached for a year (`immutable`); `styles.css` is cached for an hour and revalidated on change.
 - **Vercel Speed Insights** is embedded on every page to track real-user Core Web Vitals (LCP, CLS, INP) from the Vercel dashboard.
 
