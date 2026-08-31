@@ -89,7 +89,7 @@ html[data-motion="off"] main:has(> a:first-child) > section:nth-of-type(2) li fi
 main :is(section, article) > header > p:first-child,
 main > section:first-of-type > p:first-child {
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.3em;
   color: var(--primary);
@@ -280,7 +280,7 @@ body > nav[aria-label="Primary"] > a:hover > img {
 body > nav[aria-label="Primary"] > a > span {
   position: absolute; top: 100%; left: 50%; margin-top: 10px;
   font-family: var(--font-mono);
-  font-size: 9px; text-transform: uppercase; letter-spacing: 0.15em;
+  font-size: 12px; text-transform: uppercase; letter-spacing: 0.15em;
   color: var(--bone);
   white-space: nowrap;
   opacity: 0; transform: translate(-50%, -4px);
@@ -473,7 +473,7 @@ body > nav[aria-label="Primary"] > a:hover > span { opacity: 1; transform: trans
 #origin > header > p:last-of-type {
   margin-top: 40px;
   display: inline-flex; flex-direction: column; align-items: center; gap: 8px;
-  font-size: 10px; text-transform: uppercase; letter-spacing: 0.3em;
+  font-size: 12px; text-transform: uppercase; letter-spacing: 0.3em;
   color: rgba(241, 236, 224, 0.6);
 }
 #origin > header > p:last-of-type::after {
@@ -623,7 +623,7 @@ body > nav[aria-label="Primary"] > a:hover > span { opacity: 1; transform: trans
   border: 2px solid var(--bone);
   color: var(--bone);
   font-family: var(--font-mono);
-  font-size: 10px; text-transform: uppercase; letter-spacing: 0.2em;
+  font-size: 12px; text-transform: uppercase; letter-spacing: 0.2em;
   padding: 6px 12px;
 }
 
@@ -730,7 +730,7 @@ body > nav[aria-label="Primary"] > a:hover > span { opacity: 1; transform: trans
   position: absolute; top: 12px; left: 12px;
   background: var(--primary); color: var(--ink);
   padding: 4px 8px;
-  font-size: 9px; font-weight: 700;
+  font-size: 12px; font-weight: 700;
   text-transform: uppercase; letter-spacing: 0.2em;
   z-index: 2;
 }
@@ -740,7 +740,7 @@ body > nav[aria-label="Primary"] > a:hover > span { opacity: 1; transform: trans
   border: 1px solid var(--bone);
   color: var(--bone);
   padding: 4px 8px;
-  font-size: 9px;
+  font-size: 12px;
   text-transform: uppercase; letter-spacing: 0.2em;
   z-index: 2;
 }
@@ -752,7 +752,7 @@ body > nav[aria-label="Primary"] > a:hover > span { opacity: 1; transform: trans
   z-index: 2;
 }
 #issues article footer p {
-  font-size: 10px; text-transform: uppercase; letter-spacing: 0.25em;
+  font-size: 12px; text-transform: uppercase; letter-spacing: 0.25em;
   color: rgba(241, 236, 224, 0.6);
 }
 #issues article h3 {
@@ -849,7 +849,7 @@ body > nav[aria-label="Primary"] > a:hover > span { opacity: 1; transform: trans
   padding: 8px 10px;
   z-index: 3;
 }
-#shoe aside > p:first-child { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.2em; }
+#shoe aside > p:first-child { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.2em; }
 #shoe aside > p:last-child { font-size: 11px; margin-top: 4px; line-height: 1.4; color: rgba(5,5,5,0.8); }
 #shoe aside:nth-of-type(1) { left: 8%; top: 12%; }
 #shoe aside:nth-of-type(2) { right: 6%; top: 28%; }
@@ -979,7 +979,7 @@ body > nav[aria-label="Primary"] > a:hover > span { opacity: 1; transform: trans
   display: flex; justify-content: space-between;
   border-bottom: 1px solid rgba(241, 236, 224, 0.3);
   padding-bottom: 8px; margin-bottom: 16px;
-  font-size: 10px; text-transform: uppercase; letter-spacing: 0.3em;
+  font-size: 12px; text-transform: uppercase; letter-spacing: 0.3em;
   color: var(--primary);
 }
 #lore aside > p:last-child { margin-top: 16px; color: rgba(241, 236, 224, 0.55); }
@@ -1002,7 +1002,7 @@ summary {
 summary::-webkit-details-marker { display: none; }
 
 summary > span:nth-child(1) {
-  font-size: 10px; text-transform: uppercase; letter-spacing: 0.2em;
+  font-size: 12px; text-transform: uppercase; letter-spacing: 0.2em;
   color: var(--primary);
 }
 summary > span:nth-child(2) {
@@ -1058,7 +1058,7 @@ details > p {
 
 #join form { display: flex; flex-direction: column; gap: 12px; }
 #join form label {
-  font-size: 10px; text-transform: uppercase; letter-spacing: 0.25em;
+  font-size: 12px; text-transform: uppercase; letter-spacing: 0.25em;
   color: rgba(241, 236, 224, 0.6);
   display: flex; flex-direction: column; gap: 8px;
 }
@@ -1095,7 +1095,7 @@ details > p {
 }
 
 #join form > p:first-of-type {
-  font-size: 10px; text-transform: uppercase; letter-spacing: 0.2em;
+  font-size: 12px; text-transform: uppercase; letter-spacing: 0.2em;
   /* 0.4 measured 3.38:1 against the section's dark background — WAVE
      flags that as a WCAG AA fail. 0.55 clears 4.5:1 with room to spare. */
   color: rgba(241, 236, 224, 0.55);
@@ -1123,7 +1123,7 @@ body > footer {
   justify-content: space-between;
   padding: 24px 32px 40px;
   border-top: 1px solid rgba(241, 236, 224, 0.2);
-  font-size: 10px; text-transform: uppercase; letter-spacing: 0.3em;
+  font-size: 12px; text-transform: uppercase; letter-spacing: 0.3em;
   color: rgba(241, 236, 224, 0.5);
 }
 body > footer p span { margin-right: 16px; }
@@ -1151,7 +1151,7 @@ body > button[aria-label="Toggle animations"] {
   color: var(--bone);
   padding: 8px 12px;
   font-family: var(--font-mono);
-  font-size: 10px; text-transform: uppercase; letter-spacing: 0.2em;
+  font-size: 12px; text-transform: uppercase; letter-spacing: 0.2em;
   cursor: pointer;
   transition: background 0.2s, color 0.2s;
 }
@@ -1249,7 +1249,7 @@ main:has(> a:first-child) > section:nth-of-type(2) li > span:first-child {
   border-left: 4px solid var(--primary);
   padding: 4px 10px;
   font-family: var(--font-mono);
-  font-size: 10px; text-transform: uppercase; letter-spacing: 0.25em;
+  font-size: 12px; text-transform: uppercase; letter-spacing: 0.25em;
   backdrop-filter: blur(4px);
   z-index: 2;
 }
@@ -1515,7 +1515,7 @@ main:has(> a:first-child) > section:nth-of-type(2) li.is-revealed figure p span 
   animation: about-heading-in 0.8s ease-out 1.15s both;
 }
 #about > header > nav a {
-  font-size: 10px; text-transform: uppercase; letter-spacing: 0.2em;
+  font-size: 12px; text-transform: uppercase; letter-spacing: 0.2em;
   color: rgba(241, 236, 224, 0.65);
   border-bottom: 1px solid transparent;
   transition: color 0.2s, border-color 0.2s;
@@ -1651,7 +1651,7 @@ main:has(> a:first-child) > section:nth-of-type(2) li.is-revealed figure p span 
   background: var(--primary); color: var(--ink);
   padding: 4px 10px;
   font-family: var(--font-mono);
-  font-size: 10px; font-weight: 700;
+  font-size: 12px; font-weight: 700;
   text-transform: uppercase; letter-spacing: 0.2em;
 }
 
