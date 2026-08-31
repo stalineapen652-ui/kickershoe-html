@@ -1096,7 +1096,9 @@ details > p {
 
 #join form > p:first-of-type {
   font-size: 10px; text-transform: uppercase; letter-spacing: 0.2em;
-  color: rgba(241, 236, 224, 0.4);
+  /* 0.4 measured 3.38:1 against the section's dark background — WAVE
+     flags that as a WCAG AA fail. 0.55 clears 4.5:1 with room to spare. */
+  color: rgba(241, 236, 224, 0.55);
 }
 #join form > p[data-state="success"] {
   border: 2px solid var(--primary);
