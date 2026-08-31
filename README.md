@@ -1,6 +1,11 @@
 # KICKERSHOE
 
-An interactive motion-comic site for **KICKERSHOE** — a sneaker brand told through comic-book lore. Issue 001, *The Mantis Origin*, follows a praying mantis whose broken leg inspired the boot that became a legend. Issue 002, *The Elephant in the Room*, tells the (unofficial) origin story of the Converse Originals. Issue 003, *The Goat OG*, follows an undersized underdog boxer whose fight against bigger rivals — and the rival who became a believer — inspired the F50 boot.
+An interactive motion-comic site for **KICKERSHOE** — a fictional sneaker brand told through comic-book lore. Each issue follows an invented animal underdog whose origin story (unofficially, unaffiliated) explains how a real shoe silhouette came to exist:
+
+- **Issue 001**, *The Mantis Origin* — a praying mantis whose broken leg inspired the boot that became a legend.
+- **Issue 002**, *The Goat OG* — an undersized boxer whose fight against bigger rivals, and the rival who became a believer, inspired the F50 boot.
+- **Issue 003**, *The Elephant in the Room* — the (unofficial) origin story of the Converse Originals.
+- **Issue 004**, *The Goldfish Memory* — a swimmer, a storm, and the calm fish that inspired the shoe he built in its memory.
 
 **Live site:** https://kickershoe.com (deployed via Vercel, see [Deployment](#deployment))
 **Repository:** https://github.com/stalineapen652-ui/kickershoe-html
@@ -9,13 +14,12 @@ An interactive motion-comic site for **KICKERSHOE** — a sneaker brand told thr
 
 This project is a static, hand-built website — no CMS, no JavaScript framework. Pages are plain HTML with a single shared stylesheet, styled around a torn-paper / halftone comic aesthetic with scroll-driven animation.
 
-Markup is written **fully semantic**: no `<div>`, no `class` attribute anywhere, and `id` used only where HTML has no alternative (in-page anchor targets). Styling in `styles.css` is driven by element type, structural combinators, and attribute selectors instead of classes — see the design notes in [`docs/superpowers/specs/`](docs/superpowers/specs/) for the approach.
+Markup is written **fully semantic**: no `<div>`, no `class` attribute anywhere, and `id` used only where HTML has no alternative (in-page anchor targets). Styling in `styles.css` is driven by element type, structural combinators, and attribute selectors instead of classes — see the design notes in [`docs/design/specs/`](docs/design/specs/) for the approach.
 
 - [`index.html`](index.html) — landing page: hero, issue library, "the shoe" case file, lore archive, newsletter signup
-- [`issue-001.html`](issue-001.html) — the full Issue 001 motion comic, panel by panel
-- [`issue-002.html`](issue-002.html) — the full Issue 002 motion comic, panel by panel
-- [`issue-003.html`](issue-003.html) — the full Issue 003 motion comic, panel by panel
+- [`issue-001.html`](issue-001.html) / [`issue-002.html`](issue-002.html) / [`issue-003.html`](issue-003.html) / [`issue-004.html`](issue-004.html) — each issue's full motion comic, panel by panel, plus its own lore/case-file section
 - [`about.html`](about.html) — the KICKERSHOE concept: what the shared universe is, how issues connect through recurring rivals, the cast, and a "not affiliated" disclaimer
+- [`404.html`](404.html) — custom not-found page
 
 ## Tech Stack
 
@@ -25,59 +29,69 @@ Markup is written **fully semantic**: no `<div>`, no `class` attribute anywhere,
 | Interactivity | Vanilla JavaScript (no bundler) |
 | Analytics | [Vercel Speed Insights](https://vercel.com/docs/speed-insights) |
 | Hosting | [Vercel](https://vercel.com) |
-| Build step | A single Node script that vendors the Speed Insights browser bundle — see [`scripts/build.js`](scripts/build.js) |
+| Build step | A Node script that assembles the deployable site into `dist/` — see [`scripts/build.js`](scripts/build.js) |
 
 ## Project Structure
 
 ```
 kickershoe-html/
 ├── index.html              # Landing page
-├── issue-001.html          # Issue 001 motion comic
-├── issue-002.html          # Issue 002 motion comic
-├── issue-003.html          # Issue 003 motion comic
-├── about.html              # About the KICKERSHOE universe
-├── styles.css              # Shared stylesheet for all pages
-├── sitemap.xml              # XML sitemap for search engines
-├── robots.txt                # Crawl rules + sitemap pointer
+├── issue-001.html          # Issue 001 — The Mantis Origin
+├── issue-002.html          # Issue 002 — The Goat OG
+├── issue-003.html          # Issue 003 — The Elephant in the Room
+├── issue-004.html          # Issue 004 — The Goldfish Memory
+├── about.html               # About the KICKERSHOE universe
+├── 404.html                  # Custom not-found page
+├── styles.css                # Shared stylesheet for all pages
+├── sitemap.xml                # XML sitemap for search engines
+├── robots.txt                  # Crawl rules + sitemap pointer
 ├── assets/
-│   ├── images/              # Comic panels, covers, product shots (WebP)
-│   ├── logo/                 # Brand logo
+│   ├── images/               # Comic panels, product shots (WebP)
+│   ├── logo/                  # Brand logo (WebP + SVG)
+│   ├── icons/                 # Nav icon SVGs
 │   └── js/
 │       ├── speed-insights-init.js   # Loads Speed Insights on each page
 │       └── speed-insights.mjs        # Vendored bundle (generated by build, git-ignored)
+├── docs/design/               # Design specs + implementation plans written during development
 ├── scripts/
-│   └── build.js             # Vendors @vercel/speed-insights into assets/js/
-├── vercel.json              # Vercel build + caching config
+│   └── build.js               # Assembles dist/ (minified CSS, vendored JS, copied assets)
+├── vercel.json                 # Vercel build + caching config
 └── package.json
 ```
 
+`dist/` itself isn't in the repo — it's the build output, regenerated by `npm run build` and git-ignored.
+
 ## Running Locally
 
-No dev server or framework is required — this is static HTML.
+No dev server or framework is required to view the site — it's static HTML.
+
+```bash
+npm run dev
+```
+
+This starts a local static server (`python -m http.server 4173`) serving the project root directly, unbuilt — open `http://localhost:4173`. No `npm install` needed for this; it's just a way to preview the source files as-is.
+
+To produce the actual deployable output (minified CSS, vendored analytics bundle, only the files the live site needs):
 
 ```bash
 npm install
 npm run build
 ```
 
-`npm run build` copies the Speed Insights browser bundle into `assets/js/` (it's git-ignored and regenerated on every build). After that, open `index.html` directly in a browser, or serve the folder with any static file server, e.g.:
-
-```bash
-npx serve .
-```
+This writes everything into `dist/`. Serve that folder with any static file server, e.g. `npx serve dist`, to preview exactly what Vercel deploys.
 
 ## Deployment
 
 The site is hosted on **Vercel**, connected directly to this GitHub repository:
 
 - Every push to `main` triggers an automatic production deploy.
-- Vercel runs `npm run build` (see [`vercel.json`](vercel.json)) and serves the repo root as static output — no server-side rendering.
+- Vercel runs `npm run build` and serves `dist/` (see [`vercel.json`](vercel.json)) — no server-side rendering. Only the files `scripts/build.js` copies into `dist/` (HTML, minified CSS, `assets/`, `robots.txt`, `sitemap.xml`) are ever part of the live site; nothing else in this repo (docs, config, `README.md`) is publicly served.
 - Long-lived assets (`/assets/*`) are cached for a year (`immutable`); `styles.css` is cached for an hour and revalidated on change.
 - **Vercel Speed Insights** is embedded on every page to track real-user Core Web Vitals (LCP, CLS, INP) from the Vercel dashboard.
 
 ## SEO
 
-Every page ships a unique `<title>`/description, a canonical tag, Open Graph + Twitter Card previews (so shared comic panels render as real image cards on Reddit/Discord/Twitter), and JSON-LD structured data (`Organization` on the homepage, `ComicIssue` + `BreadcrumbList` on each issue, `AboutPage` on `about.html`). `sitemap.xml` and `robots.txt` live at the repo root and both assume the production domain `kickershoe.com` — update them (and every `canonical`/`og:url`/JSON-LD `url` field) if that domain changes. `cleanUrls` in `vercel.json` means these all resolve without the `.html` extension in production.
+Every page ships a unique `<title>`/description, a canonical tag, Open Graph + Twitter Card previews (so shared comic panels render as real image cards on Reddit/Discord/Twitter), and JSON-LD structured data (`Organization` + `WebSite` on the homepage, `ComicIssue` + `BreadcrumbList` on each issue, `AboutPage` on `about.html`). `sitemap.xml` and `robots.txt` live at the repo root and both assume the production domain `kickershoe.com` — update them (and every `canonical`/`og:url`/JSON-LD `url` field) if that domain changes. `cleanUrls` in `vercel.json` means these all resolve without the `.html` extension in production.
 
 Off-site distribution (submitting the sitemap to Google Search Console, mirroring issues to a platform like Webtoon Canvas or Tapas, cross-posting panels) isn't automated by anything in this repo and is on whoever runs the site to do.
 

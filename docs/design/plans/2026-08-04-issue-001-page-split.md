@@ -649,7 +649,7 @@ git status
 ```
 Expected: working tree clean (everything committed in Tasks 1–4), or only
 whitespace/line-ending noise from the environment (already seen with
-`docs/superpowers/specs/...` — that's a pre-existing LF/CRLF warning, not
+`docs/design/specs/...` — that's a pre-existing LF/CRLF warning, not
 new work).
 
 - [ ] **Step 3: If Task 5 required fixes, commit them**

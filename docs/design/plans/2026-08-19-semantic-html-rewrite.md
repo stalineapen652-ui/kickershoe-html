@@ -8,7 +8,7 @@
 
 **Tech Stack:** Plain HTML5, CSS3 (incl. `animation-timeline: view()` scroll-driven animation with `@supports` fallback), vanilla JS. No test framework exists in this repo — verification is (a) automated grep checks that no `<div`, `class=`, or disallowed `id=` remain, and (b) manual visual comparison in a browser against the current deployed site.
 
-Reference spec: `docs/superpowers/specs/2026-08-19-semantic-html-rewrite-design.md`
+Reference spec: `docs/design/specs/2026-08-19-semantic-html-rewrite-design.md`
 
 ---
 

@@ -2,8 +2,9 @@
   "name": "kickershoe-html",
   "version": "1.0.0",
   "private": true,
-  "description": "KICKERSHOE comic site — static HTML/CSS with a small npm build step for vendoring browser assets.",
+  "description": "KICKERSHOE comic site — static HTML/CSS with a small npm build step that assembles the deployable output into dist/.",
   "scripts": {
+    "dev": "python -m http.server 4173",
     "build": "node scripts/build.js"
   },
   "repository": {
