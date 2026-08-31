@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Anton&family=JetBrains+Mono:wght@400;700&family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=JetBrains+Mono:wght@400;700&family=Bebas+Neue&family=Space+Grotesk:wght@400;500&display=swap');
 
 :root {
   --bg: #0a0f0a;
@@ -10,6 +10,7 @@
   --purple: #dc00dc;
   --font-display: 'Anton', 'Impact', sans-serif;
   --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+  --font-body: 'Space Grotesk', 'JetBrains Mono', sans-serif;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -1230,6 +1231,20 @@ main:has(> a:first-child) > section:nth-of-type(2) li:nth-of-type(4n) {
   clip-path: polygon(0 0, 100% 0, 100% 100%, 10% 100%, 0 88%);
 }
 
+/* The notch above still reaches into a full-width caption box at its bottom
+   corner and trims the last line of text — narrow the caption and pull it
+   away from whichever corner that panel's notch cuts. */
+main:has(> a:first-child) > section:nth-of-type(2) li:nth-of-type(4n+1) figure,
+main:has(> a:first-child) > section:nth-of-type(2) li:nth-of-type(4n+3) figure {
+  right: auto;
+  width: 80%;
+}
+main:has(> a:first-child) > section:nth-of-type(2) li:nth-of-type(4n+2) figure,
+main:has(> a:first-child) > section:nth-of-type(2) li:nth-of-type(4n) figure {
+  left: auto;
+  width: 80%;
+}
+
 main:has(> a:first-child) > section:nth-of-type(2) li figure {
   position: absolute;
   bottom: 12px; left: 12px; right: 12px;
@@ -1246,7 +1261,12 @@ main:has(> a:first-child) > section:nth-of-type(2) li.is-revealed figure {
   opacity: 1;
   transform: translateY(0);
 }
-main:has(> a:first-child) > section:nth-of-type(2) li figure p { font-size: 12px; line-height: 1.35; }
+main:has(> a:first-child) > section:nth-of-type(2) li figure p {
+  font-family: var(--font-body);
+  font-size: 13px;
+  line-height: 1.5;
+  letter-spacing: 0.01em;
+}
 main:has(> a:first-child) > section:nth-of-type(2) li figure p span {
   display: inline-block;
   opacity: 0;
@@ -1338,6 +1358,62 @@ main:has(> a:first-child) > section:nth-of-type(2) li.is-revealed figure p span 
 }
 @media (prefers-reduced-motion: reduce) {
   #brand-mark .brand-connector span { transition: none !important; height: 60px !important; }
+}
+
+/* ============ Issue Page: More From The Universe ============
+   A cross-link module at the bottom of every issue pointing to the other
+   three — internal linking between issues, plus a bit more on-page text
+   per issue for search engines to read. */
+#more-issues {
+  border-top: 4px solid var(--bone);
+  padding: 80px 32px 100px;
+  max-width: 1500px;
+  margin: 0 auto;
+}
+#more-issues > header { margin-bottom: 40px; }
+#more-issues > header h2 {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 5vw, 56px);
+  letter-spacing: 0.02em;
+  margin-top: 8px;
+}
+#more-issues ul {
+  list-style: none;
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+#more-issues li a {
+  display: block;
+  border: 4px solid var(--bone);
+  box-shadow: 8px 8px 0 0 var(--ink), 8px 8px 0 4px var(--bone);
+  background: var(--ink);
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+#more-issues li a:hover {
+  transform: translateY(-8px);
+  box-shadow: 14px 14px 0 0 var(--primary);
+}
+#more-issues li img { width: 100%; aspect-ratio: 1280 / 890; object-fit: cover; transition: transform 0.6s; }
+#more-issues li a:hover img { transform: scale(1.07); }
+#more-issues li h3 {
+  margin: 18px 18px 0;
+  font-family: var(--font-display);
+  font-size: 20px; letter-spacing: 0.04em;
+}
+#more-issues li p {
+  margin: 8px 18px 16px;
+  font-family: var(--font-body);
+  font-size: 13px; line-height: 1.5;
+  color: rgba(241, 236, 224, 0.7);
+}
+#more-issues li span {
+  display: flex; align-items: center; justify-content: space-between;
+  border-top: 2px solid var(--bone);
+  padding: 10px 18px;
+  font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em;
+  color: var(--primary);
 }
 
 /* ============ About Page ============ */
