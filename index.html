@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>KICKERSHOE — Motion Comics: The Untold Origins of Legendary Shoes</title>
   <meta name="description" content="KICKERSHOE is a shared universe of fictional motion comics — a mantis, a goat, an elephant, a goldfish — each hiding the unofficial origin story behind a legendary shoe. Start reading free." />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/logo/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/logo/favicon-16x16.png" />
+  <link rel="apple-touch-icon" href="/assets/logo/apple-touch-icon.png" />
   <link rel="canonical" href="https://kickershoe.com/" />
 
   <meta property="og:type" content="website" />
@@ -49,7 +53,10 @@
 <body>
 
   <!-- ============ LOADING SCREEN ============ -->
-  <aside aria-label="Loading" role="status">
+  <!-- <output>, not <aside> — its implicit ARIA role is "status" (a
+       screen-reader live region), which is what a loading indicator
+       actually needs; role="status" isn't a permitted override on <aside>. -->
+  <output aria-label="Loading">
     <svg viewBox="0 0 300 300" aria-hidden="true">
       <defs>
         <filter id="loader-wobble">
@@ -60,11 +67,11 @@
       <path id="loader-spiral" />
     </svg>
     <img src="assets/logo/kickershoe-logo.webp" alt="" aria-hidden="true" width="673" height="761" />
-  </aside>
+  </output>
 
   <script>
     (function () {
-      var loader = document.querySelector('body > aside[aria-label="Loading"]');
+      var loader = document.querySelector('body > output[aria-label="Loading"]');
       var KEY = 'kickershoe-loaded';
       var already;
       try { already = sessionStorage.getItem(KEY); } catch (e) {}
@@ -176,7 +183,7 @@
           <li aria-expanded="false">
             <img src="assets/images/issue-001/1friends.webp" alt="The mantis and his frog friend hidden in the tall grass at night" width="1280" height="890" />
             <footer>
-              <h3>THE MANTIS ORIGIN</h3>
+              <h2>THE MANTIS ORIGIN</h2>
               <p>A shoe born from a broken leg and a quiet vow.</p>
               <a href="issue-001.html"><span>READ ISSUE 001</span><span>→</span></a>
             </footer>
@@ -184,7 +191,7 @@
           <li aria-expanded="false">
             <img src="assets/images/issue-003/1locker.webp" alt="A goat boxer sitting alone in a dim locker room, wrapping his hands" width="1420" height="821" />
             <footer>
-              <h3>THE GOAT OG</h3>
+              <h2>THE GOAT OG</h2>
               <p>An undersized goat, a ring stacked against him, and the boot forged in defeat.</p>
               <a href="issue-002.html"><span>READ ISSUE 002</span><span>→</span></a>
             </footer>
@@ -192,7 +199,7 @@
           <li aria-expanded="false">
             <img src="assets/images/issue-002/1dribble.webp" alt="A young elephant dribbling a basketball alone on a city street court at night" width="1600" height="1112" />
             <footer>
-              <h3>THE ELEPHANT IN THE ROOM</h3>
+              <h2>THE ELEPHANT IN THE ROOM</h2>
               <p>A basketball dream, a broken hop, and the high-top that started it all.</p>
               <a href="issue-003.html"><span>READ ISSUE 003</span><span>→</span></a>
             </footer>
@@ -200,7 +207,7 @@
           <li aria-expanded="false">
             <img src="assets/images/issue-004/1storm.webp" alt="A swimmer reaching for a goldfish amid a violent storm" width="1266" height="695" />
             <footer>
-              <h3>THE GOLDFISH MEMORY</h3>
+              <h2>THE GOLDFISH MEMORY</h2>
               <p>A tiny fish, a big obsession, and the shoe born from missing something orange.</p>
               <a href="issue-004.html"><span>READ ISSUE 004</span><span>→</span></a>
             </footer>
@@ -386,7 +393,11 @@
 
     <!-- ============ JOIN ============ -->
     <section id="join">
-      <article>
+      <!-- <figure>, not <article> — article is "sectioning content" and
+           resets the heading outline, so the h2 below wouldn't count as
+           this <section>'s own heading (the exact warning this avoids).
+           figure is plain grouping content, so it doesn't. -->
+      <figure>
         <header>
           <p><svg class="icon-mark" viewBox="0 0 64 64" aria-hidden="true"><path d="M20 20 Q32 14 44 20 Q50 32 44 44 Q32 50 20 44 Q14 32 20 20 Z M32 26 V38 M26 32 H38"/></svg>// TRANSMISSION INCOMING</p>
           <h2>GET THE NEXT<br /><mark>ISSUE</mark> DROPPED<br />TO YOUR INBOX.</h2>
@@ -401,7 +412,7 @@
             READER ID — EMAIL
             <input type="email" name="email" required placeholder="you@example.com" />
           </label>
-          <input type="checkbox" name="botcheck" hidden tabindex="-1" autocomplete="off" />
+          <input type="checkbox" name="botcheck" hidden tabindex="-1" />
           <button type="submit">
             <span>SEND ME THE NEXT ISSUE</span><span>→</span>
           </button>
@@ -409,7 +420,7 @@
           <p hidden data-state="success">RECEIVED. THE MANTIS HAS YOUR FREQUENCY.</p>
           <p hidden data-state="error">SIGNAL LOST. TRY AGAIN IN A MOMENT.</p>
         </form>
-      </article>
+      </figure>
     </section>
   </main>
 

@@ -163,27 +163,27 @@ button:hover .icon-mark .dot {
    browser session on first visit to the homepage. Uses opacity for
    the exit fade rather than the [hidden] attribute directly, since
    [hidden] is display:none !important sitewide and can't transition. */
-body > aside[aria-label="Loading"] {
+body > output[aria-label="Loading"] {
   position: fixed; inset: 0; z-index: 200;
   display: flex; align-items: center; justify-content: center;
   background: var(--bg);
   opacity: 1;
   transition: opacity 0.6s ease;
 }
-body > aside[aria-label="Loading"][data-closing] { opacity: 0; }
+body > output[aria-label="Loading"][data-closing] { opacity: 0; }
 
-body > aside[aria-label="Loading"] svg {
+body > output[aria-label="Loading"] svg {
   width: min(60vw, 260px);
   height: min(60vw, 260px);
 }
-body > aside[aria-label="Loading"] path {
+body > output[aria-label="Loading"] path {
   fill: none;
   stroke: var(--primary);
   stroke-width: 7;
   stroke-linecap: round;
   filter: url(#loader-wobble);
 }
-body > aside[aria-label="Loading"] img {
+body > output[aria-label="Loading"] img {
   position: absolute;
   height: 34px; width: auto;
   filter: drop-shadow(0 0 10px var(--bg)) drop-shadow(0 0 10px var(--bg));
@@ -575,14 +575,14 @@ body > nav[aria-label="Primary"] > a:hover > span { opacity: 1; transform: trans
   display: flex; flex-direction: column; align-items: flex-start; gap: 10px;
 }
 
-#origin > article li footer h3 {
+#origin > article li footer h2 {
   font-family: var(--font-display);
   color: var(--bone);
   font-size: 13px; letter-spacing: 0.1em;
   writing-mode: vertical-rl; text-orientation: mixed;
   white-space: nowrap;
 }
-#origin > article li[aria-expanded="true"] footer h3 {
+#origin > article li[aria-expanded="true"] footer h2 {
   writing-mode: horizontal-tb;
   font-size: clamp(22px, 3vw, 34px);
   line-height: 1.05;
@@ -665,15 +665,15 @@ body > nav[aria-label="Primary"] > a:hover > span { opacity: 1; transform: trans
     gap: 6px;
     background: linear-gradient(to top, rgba(5, 5, 5, 0.94) 0%, rgba(5, 5, 5, 0.75) 65%, transparent 100%);
   }
-  #origin > article li footer h3 { writing-mode: horizontal-tb; font-size: 13px; line-height: 1.2; }
-  #origin > article li[aria-expanded="true"] footer h3 { font-size: 19px; }
+  #origin > article li footer h2 { writing-mode: horizontal-tb; font-size: 13px; line-height: 1.2; }
+  #origin > article li[aria-expanded="true"] footer h2 { font-size: 19px; }
   #origin > article li footer p { font-size: 11px; line-height: 1.4; max-width: none; }
   #origin > article li footer a { font-size: 12px; padding: 6px 10px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   #origin > article li,
-  #origin > article li footer h3,
+  #origin > article li footer h2,
   #origin > article li footer p,
   #origin > article li footer a,
   #origin > article li footer > span,
@@ -1032,7 +1032,7 @@ details > p {
   padding: 100px 32px;
 }
 
-#join article {
+#join figure {
   max-width: 1100px; margin: 0 auto;
   background: var(--bg);
   padding: 56px;
@@ -1041,16 +1041,16 @@ details > p {
   grid-template-columns: 1.4fr 1fr;
   align-items: center;
 }
-@media (max-width: 720px) { #join article { grid-template-columns: 1fr; padding: 32px; } }
+@media (max-width: 720px) { #join figure { grid-template-columns: 1fr; padding: 32px; } }
 
-#join article > header h2 {
+#join figure > header h2 {
   margin-top: 12px;
   font-family: var(--font-display);
   font-size: clamp(40px, 6vw, 80px);
   line-height: 0.95;
   letter-spacing: 0.05em;
 }
-#join article > header p:last-child {
+#join figure > header p:last-child {
   margin-top: 16px;
   max-width: 420px;
   font-size: 14px; color: rgba(241, 236, 224, 0.7);

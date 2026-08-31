@@ -17,7 +17,7 @@ fs.mkdirSync(dist, { recursive: true });
 const topLevelFiles = [
   '404.html', 'about.html', 'index.html',
   'issue-001.html', 'issue-002.html', 'issue-003.html', 'issue-004.html',
-  'robots.txt', 'sitemap.xml',
+  'robots.txt', 'sitemap.xml', 'favicon.ico',
 ];
 for (const file of topLevelFiles) {
   fs.copyFileSync(path.join(root, file), path.join(dist, file));
