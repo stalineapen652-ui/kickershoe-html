@@ -394,15 +394,20 @@
         </header>
 
         <form>
+          <input type="hidden" name="access_key" value="164b9250-9f6d-450f-9160-01b399c76184" />
+          <input type="hidden" name="subject" value="New KICKERSHOE newsletter signup" />
+          <input type="hidden" name="from_name" value="KICKERSHOE" />
           <label>
             READER ID — EMAIL
-            <input type="email" required placeholder="you@example.com" />
+            <input type="email" name="email" required placeholder="you@example.com" />
           </label>
+          <input type="checkbox" name="botcheck" hidden tabindex="-1" autocomplete="off" />
           <button type="submit">
             <span>SEND ME THE NEXT ISSUE</span><span>→</span>
           </button>
           <p>UNSUBSCRIBE WITH A SHED OF SKIN</p>
-          <p hidden>RECEIVED. THE MANTIS HAS YOUR FREQUENCY.</p>
+          <p hidden data-state="success">RECEIVED. THE MANTIS HAS YOUR FREQUENCY.</p>
+          <p hidden data-state="error">SIGNAL LOST. TRY AGAIN IN A MOMENT.</p>
         </form>
       </article>
     </section>
@@ -451,11 +456,34 @@
     document.querySelector('#join form').addEventListener('submit', function (event) {
       event.preventDefault();
       var form = this;
-      var success = form.querySelector('p:last-of-type');
-      Array.prototype.forEach.call(form.children, function (child) {
-        if (child !== success) child.hidden = true;
-      });
-      success.hidden = false;
+      var button = form.querySelector('button[type="submit"]');
+      var success = form.querySelector('p[data-state="success"]');
+      var error = form.querySelector('p[data-state="error"]');
+
+      error.hidden = true;
+      button.disabled = true;
+
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { Accept: 'application/json' },
+        body: new FormData(form)
+      })
+        .then(function (res) { return res.json(); })
+        .then(function (data) {
+          if (data.success) {
+            Array.prototype.forEach.call(form.children, function (child) {
+              if (child !== success) child.hidden = true;
+            });
+            success.hidden = false;
+          } else {
+            error.hidden = false;
+            button.disabled = false;
+          }
+        })
+        .catch(function () {
+          error.hidden = false;
+          button.disabled = false;
+        });
     });
   </script>
 
