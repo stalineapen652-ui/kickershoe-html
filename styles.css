@@ -3,6 +3,19 @@
    whole file downloads, THEN starts the font fetch, serializing what
    should be a parallel request. See index.html's <head> for the link tags. */
 
+/* A metrics-adjusted local fallback for Anton, the display font used up to
+   200px on the hero H1. Measured (via canvas text metrics) at ~75.5% the
+   character width of a generic sans-serif at the same font-size — Anton is
+   a very condensed face — so without this, the fallback-to-webfont swap
+   visibly reflows headings (a real layout-shift source) as soon as Anton
+   finishes loading. Scaling the fallback down to match keeps line-wrapping
+   and heading width stable across the swap instead. */
+@font-face {
+  font-family: 'Anton-fallback';
+  src: local('Arial'), local('Helvetica'), local('sans-serif');
+  size-adjust: 75.5%;
+}
+
 :root {
   --bg: #0a0f0a;
   --ink: #050505;
@@ -11,7 +24,7 @@
   --secondary: #ff8a14;
   --gold: #d4a23a;
   --purple: #dc00dc;
-  --font-display: 'Anton', 'Impact', sans-serif;
+  --font-display: 'Anton', 'Anton-fallback', sans-serif;
   --font-mono: 'JetBrains Mono', 'Courier New', monospace;
   --font-body: 'Space Grotesk', 'JetBrains Mono', sans-serif;
 }
