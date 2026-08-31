@@ -1,4 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Anton&family=JetBrains+Mono:wght@400;700&family=Bebas+Neue&family=Space+Grotesk:wght@400;500&display=swap');
+/* Fonts are loaded via <link rel="preconnect"/"stylesheet"> tags in each
+   page's <head>, not @import here — @import blocks the CSSOM until this
+   whole file downloads, THEN starts the font fetch, serializing what
+   should be a parallel request. See index.html's <head> for the link tags. */
 
 :root {
   --bg: #0a0f0a;
@@ -68,7 +71,6 @@ html[data-motion="off"] main:has(> a:first-child) > section:nth-of-type(2) li fi
   transform: none !important;
   clip-path: none !important;
 }
-html[data-motion="off"] #brand-mark .brand-connector span { height: 60px !important; }
 
 /* ============ Shared: section-intro label (was .eyebrow-sm) ============ */
 main :is(section, article) > header > p:first-child,
@@ -306,10 +308,14 @@ body > nav[aria-label="Primary"] > a:hover > span { opacity: 1; transform: trans
 }
 
 /* Rising spore particles (was .spores + 20 timed spans) recreated as a single
-   tiled, animated radial-gradient field — same atmosphere, one element. */
+   tiled, animated radial-gradient field — same atmosphere, one element.
+   Animates transform (composited/GPU) instead of background-position (which
+   forces a main-thread repaint every frame) — the element is doubled in
+   height so its own already-repeating pattern covers the translateY
+   distance, then #origin's overflow:hidden clips it back down. */
 #origin::after {
   content: '';
-  position: absolute; inset: 0;
+  position: absolute; left: 0; right: 0; top: 0; height: 200%;
   overflow: hidden;
   pointer-events: none;
   background-image:
@@ -325,8 +331,8 @@ body > nav[aria-label="Primary"] > a:hover > span { opacity: 1; transform: trans
   z-index: 1;
 }
 @keyframes float-spore {
-  0% { background-position: 10% 100%, 55% 100%, 85% 100%; }
-  100% { background-position: 10% -120%, 55% -160%, 85% -140%; }
+  from { transform: translateY(0); }
+  to { transform: translateY(-50%); }
 }
 
 /* Four corner registration marks (was .reg-mark .tl/.tr/.bl/.br) drawn as
@@ -430,15 +436,17 @@ body > nav[aria-label="Primary"] > a:hover > span { opacity: 1; transform: trans
   mix-blend-mode: screen;
   animation: glitch-shift-2 5s infinite steps(1);
 }
+/* transform-only (no clip-path) so this stays a composited animation —
+   still reads as a glitch via the RGB-fringe jitter alone. */
 @keyframes glitch-shift-1 {
-  0%, 90%, 100% { transform: translate(-3px, 0); clip-path: inset(0 0 0 0); }
-  92% { transform: translate(-6px, 2px); clip-path: inset(20% 0 30% 0); }
-  94% { transform: translate(-2px, -2px); clip-path: inset(60% 0 10% 0); }
+  0%, 90%, 100% { transform: translate(-3px, 0); }
+  92% { transform: translate(-6px, 2px); }
+  94% { transform: translate(-2px, -2px); }
 }
 @keyframes glitch-shift-2 {
-  0%, 90%, 100% { transform: translate(3px, 0); clip-path: inset(0 0 0 0); }
-  92% { transform: translate(6px, -2px); clip-path: inset(40% 0 40% 0); }
-  94% { transform: translate(2px, 2px); clip-path: inset(10% 0 60% 0); }
+  0%, 90%, 100% { transform: translate(3px, 0); }
+  92% { transform: translate(6px, -2px); }
+  94% { transform: translate(2px, 2px); }
 }
 
 #origin > header > p:nth-of-type(2) {
@@ -939,6 +947,21 @@ body > nav[aria-label="Primary"] > a:hover > span { opacity: 1; transform: trans
   font-size: 12px; line-height: 1.6;
   color: rgba(241, 236, 224, 0.7);
 }
+/* Reference photo pinned to the top of the case file — bleeds to the
+   aside's own border on three sides, divider before the notebook text. */
+#lore aside figure {
+  margin: -24px -24px 20px;
+  border-bottom: 2px solid var(--bone);
+  overflow: hidden;
+  background: var(--ink);
+}
+#lore aside figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
 #lore aside > header {
   display: flex; justify-content: space-between;
   border-bottom: 1px solid rgba(241, 236, 224, 0.3);
@@ -1317,47 +1340,6 @@ main:has(> a:first-child) > section:nth-of-type(2) li.is-revealed figure p span 
     position: static;
     width: auto;
   }
-}
-
-/* ============ Issue Page: Brand Mark ============
-   A brand shoe image (placeholder until a per-issue asset is supplied),
-   framed in the site's signature border-and-offset-shadow treatment, sitting
-   between the comic and the lore section. Two short lines grow downward
-   from its left/right edges toward the lore heading below it, drawn in on
-   scroll via the same .is-revealed class pattern as the comic panels. */
-#brand-mark {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 40px 32px 0;
-}
-#brand-mark figure {
-  width: min(360px, 60vw);
-  border: 4px solid var(--bone);
-  box-shadow: 8px 8px 0 0 var(--ink), 8px 8px 0 4px var(--bone);
-  background: var(--ink);
-}
-#brand-mark img {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-#brand-mark .brand-connector {
-  display: flex;
-  justify-content: space-between;
-  width: min(360px, 60vw);
-}
-#brand-mark .brand-connector span {
-  width: 2px;
-  height: 0;
-  background: var(--primary);
-  transition: height 1s ease;
-}
-#brand-mark.is-revealed .brand-connector span {
-  height: 60px;
-}
-@media (prefers-reduced-motion: reduce) {
-  #brand-mark .brand-connector span { transition: none !important; height: 60px !important; }
 }
 
 /* ============ Issue Page: More From The Universe ============

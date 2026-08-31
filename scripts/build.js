@@ -10,3 +10,20 @@ const dest = path.join(outDir, 'speed-insights.mjs');
 fs.mkdirSync(outDir, { recursive: true });
 fs.copyFileSync(src, dest);
 console.log('Vendored @vercel/speed-insights ->', path.relative(process.cwd(), dest));
+
+// Minifies styles.css in place, in this build checkout only — the repo's
+// own copy stays commented/formatted for development. Deliberately a plain
+// regex pass (strip comments, collapse whitespace, trim around structural
+// punctuation) rather than a full parser: it never touches whitespace
+// around +/-/* /, which calc() requires on both sides to stay valid, and
+// this file has no non-empty quoted content: strings it could mangle.
+const cssPath = path.join(__dirname, '..', 'styles.css');
+const rawCss = fs.readFileSync(cssPath, 'utf8');
+const minifiedCss = rawCss
+  .replace(/\/\*[\s\S]*?\*\//g, '')
+  .replace(/\s+/g, ' ')
+  .replace(/\s*([{}:;,])\s*/g, '$1')
+  .replace(/;}/g, '}')
+  .trim();
+fs.writeFileSync(cssPath, minifiedCss);
+console.log(`Minified styles.css -> ${rawCss.length} -> ${minifiedCss.length} bytes`);
