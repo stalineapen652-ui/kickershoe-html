@@ -25,7 +25,14 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@400;500&display=swap" />
+  <!-- Loaded non-render-blocking: media=print doesn't match on load so the
+       browser fetches it without holding up first paint, then onload flips
+       it to apply. noscript covers browsers/crawlers with JS off. Safe to
+       defer since the fallback-font size-adjust already keeps the later
+       swap from shifting layout. -->
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Anton&family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@400;500&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@400;500&display=swap" media="print" onload="this.media=&#39;all&#39;" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@400;500&display=swap" /></noscript>
   <link rel="stylesheet" href="styles.css" />
 
   <script type="application/ld+json">
@@ -67,7 +74,7 @@
       </defs>
       <path id="loader-spiral" />
     </svg>
-    <img src="assets/logo/kickershoe-logo.webp" alt="" aria-hidden="true" width="673" height="761" />
+    <img src="assets/logo/kickershoe-logo.webp" alt="" aria-hidden="true" width="177" height="200" />
   </output>
 
   <script>
@@ -119,15 +126,15 @@
   <!-- ============ HEADER ============ -->
   <header>
     <a href="#origin" aria-label="KICKERSHOE — home">
-      <img src="assets/logo/SVG/logo.svg" alt="KICKERSHOE" />
+      <img src="assets/logo/SVG/logo.svg" alt="KICKERSHOE" width="575" height="121" />
     </a>
   </header>
 
   <!-- ============ PRIMARY NAV ============ -->
   <nav aria-label="Primary">
-    <a href="#origin"><img src="assets/icons/SVG/orgin.svg" alt="" /><span>Origin</span></a>
-    <a href="about.html"><img src="assets/icons/SVG/about.svg" alt="" /><span>About</span></a>
-    <a href="about.html#community"><img src="assets/icons/SVG/connect.svg" alt="" /><span>Connect</span></a>
+    <a href="#origin"><img src="assets/icons/SVG/orgin.svg" alt="" width="73" height="36" /><span>Origin</span></a>
+    <a href="about.html"><img src="assets/icons/SVG/about.svg" alt="" width="59" height="69" /><span>About</span></a>
+    <a href="about.html#community"><img src="assets/icons/SVG/connect.svg" alt="" width="62" height="68" /><span>Connect</span></a>
   </nav>
 
   <script>
@@ -182,7 +189,7 @@
 
         <ul>
           <li aria-expanded="false">
-            <img src="assets/images/issue-001/1friends.webp" alt="The mantis and his frog friend hidden in the tall grass at night" width="1280" height="890" />
+            <img src="assets/images/issue-001/1friends.webp" alt="The mantis and his frog friend hidden in the tall grass at night" width="1280" height="890" fetchpriority="high" />
             <footer>
               <h2>THE MANTIS ORIGIN</h2>
               <p>A shoe born from a broken leg and a quiet vow.</p>
@@ -296,7 +303,7 @@
       </header>
 
       <figure>
-        <img src="assets/images/shoe/mantis-shoe.webp" alt="The Mantis boot floating in green light" width="1166" height="652" />
+        <img src="assets/images/shoe/mantis-shoe.webp" srcset="assets/images/shoe/mantis-shoe-sm.webp 700w, assets/images/shoe/mantis-shoe.webp 1166w" sizes="(max-width: 720px) calc(100vw - 64px), 1500px" alt="The Mantis boot floating in green light" width="1166" height="652" />
 
         <aside>
           <p>[01] EXOSKELETON GRIP</p>

@@ -25,7 +25,14 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@400;500&display=swap" />
+  <!-- Loaded non-render-blocking: media=print doesn't match on load so the
+       browser fetches it without holding up first paint, then onload flips
+       it to apply. noscript covers browsers/crawlers with JS off. Safe to
+       defer since the fallback-font size-adjust already keeps the later
+       swap from shifting layout. -->
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Anton&family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@400;500&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@400;500&display=swap" media="print" onload="this.media=&#39;all&#39;" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@400;500&display=swap" /></noscript>
   <link rel="stylesheet" href="styles.css" />
 
   <script type="application/ld+json">
@@ -60,15 +67,15 @@
   <!-- ============ HEADER ============ -->
   <header>
     <a href="index.html" aria-label="KICKERSHOE — home">
-      <img src="assets/logo/SVG/logo.svg" alt="KICKERSHOE" />
+      <img src="assets/logo/SVG/logo.svg" alt="KICKERSHOE" width="575" height="121" />
     </a>
   </header>
 
   <!-- ============ PRIMARY NAV ============ -->
   <nav aria-label="Primary">
-    <a href="index.html#origin"><img src="assets/icons/SVG/orgin.svg" alt="" /><span>Origin</span></a>
-    <a href="about.html"><img src="assets/icons/SVG/about.svg" alt="" /><span>About</span></a>
-    <a href="about.html#community"><img src="assets/icons/SVG/connect.svg" alt="" /><span>Connect</span></a>
+    <a href="index.html#origin"><img src="assets/icons/SVG/orgin.svg" alt="" width="73" height="36" /><span>Origin</span></a>
+    <a href="about.html"><img src="assets/icons/SVG/about.svg" alt="" width="59" height="69" /><span>About</span></a>
+    <a href="about.html#community"><img src="assets/icons/SVG/connect.svg" alt="" width="62" height="68" /><span>Connect</span></a>
   </nav>
 
   <script>
