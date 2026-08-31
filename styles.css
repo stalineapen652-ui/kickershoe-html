@@ -293,7 +293,15 @@ body > nav[aria-label="Primary"] > a:hover > span { opacity: 1; transform: trans
   body > nav[aria-label="Primary"] { right: 10px; gap: 26px; }
   body > nav[aria-label="Primary"]::before { width: 80px; height: 240px; }
   body > nav[aria-label="Primary"] > a > img { width: 28px; }
-  body > nav[aria-label="Primary"] > a > span { display: none; }
+  /* Visually hidden, not display:none — the icon's alt is empty (its
+     visible desktop label is the one accessible name), and display:none
+     would drop the label from the accessibility tree too, leaving the
+     link with no discernible name at all on mobile. Clipped to 1px
+     instead: invisible and out of layout, still readable by AT. */
+  body > nav[aria-label="Primary"] > a > span {
+    position: absolute; width: 1px; height: 1px;
+    margin: 0; padding: 0; overflow: hidden; clip: rect(0, 0, 0, 0);
+  }
 }
 
 /* ============ Hero ============ */
