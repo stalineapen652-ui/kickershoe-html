@@ -92,9 +92,11 @@ The site is hosted on **Vercel**, connected directly to this GitHub repository:
 
 ## SEO
 
-Every page ships a unique `<title>`/description, a canonical tag, Open Graph + Twitter Card previews (so shared comic panels render as real image cards on Reddit/Discord/Twitter), and JSON-LD structured data (`Organization` + `WebSite` on the homepage, `ComicIssue` + `BreadcrumbList` on each issue, `AboutPage` on `about.html`). `sitemap.xml` and `robots.txt` live at the repo root and both assume the production domain `kickershoe.com` — update them (and every `canonical`/`og:url`/JSON-LD `url` field) if that domain changes. `cleanUrls` in `vercel.json` means these all resolve without the `.html` extension in production.
+Every page ships a unique `<title>`/description, a canonical tag, Open Graph + Twitter Card previews (so shared comic panels render as real image cards on Reddit/Discord/Twitter), and JSON-LD structured data (`Organization` + `WebSite` + `ItemList` of all issues on the homepage, `ComicIssue` + `BreadcrumbList` on each issue, `AboutPage` on `about.html`). `sitemap.xml` and `robots.txt` live at the repo root and both assume the production domain `kickershoe.com` — update them (and every `canonical`/`og:url`/JSON-LD `url` field) if that domain changes. `cleanUrls` in `vercel.json` means these all resolve without the `.html` extension in production.
 
-Off-site distribution (submitting the sitemap to Google Search Console, mirroring issues to a platform like Webtoon Canvas or Tapas, cross-posting panels) isn't automated by anything in this repo and is on whoever runs the site to do.
+The generic "READ ISSUE 00X" links on `index.html` and `about.html` (hero slides, character cards) carry a keyword-rich `aria-label` — e.g. "Read Issue 002 — The Goat OG, the motion comic origin story behind the F50 boot" — so both screen readers and search crawlers get real anchor-text context instead of a bare issue number. When adding a new issue card/link in that style, give it the same treatment: a short, accurate `aria-label` naming the character and the shoe/story it's about.
+
+Off-site distribution (submitting the sitemap to Google Search Console, mirroring issues to a platform like Webtoon Canvas or Tapas, cross-posting panels, and building backlinks) isn't automated by anything in this repo and is on whoever runs the site to do — that's the highest-leverage remaining lever for ranking against larger sneaker-media sites on non-branded search terms.
 
 ## License
 
